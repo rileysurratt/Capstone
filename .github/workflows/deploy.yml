@@ -1,7 +1,8 @@
 name: CI/CD Workflow
 
 on:
-  push # This workflow is triggered when a pull request is closed
+  pull_request:
+    types: [closed]  # This workflow is triggered when a pull request is closed
 
 jobs:
   build-and-test:
