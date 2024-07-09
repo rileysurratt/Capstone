@@ -20,64 +20,64 @@ model User{
   email String @unique
   password String
   name String
-  address String?
-  // role Role @default(USER)
-  // createdAt DateTime @default(now())
-  // updatedAt DateTime @updatedAt
-  // orders Order[]
-  // cart Cart[]
+  address String
+  role Role @default(USER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  orders Order[]
+  cart Cart[]
 }
 
-// enum Role {
-//   USER
-//   ADMIN
-// }
+enum Role {
+  USER
+  ADMIN
+}
 
-// model Product {
-//   id Int @id @default(autoincrement())
-//   name String
-//   description String
-//   price Float?
-//   quantity Int
-//   catgoryId Int
-//   category Category @relation(fields: [catgoryId], references: [id])
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @updatedAt
-//   cartItems Cart[]
-//   orderItems  OrderItem[]
+model Product {
+  id Int @id @default(autoincrement())
+  name String
+  description String
+  price Float?
+  quantity Int
+  catgoryId Int
+  category Category @relation(fields: [catgoryId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  cartItems Cart[]
+  orderItems  OrderItem[]
 
-// }
+}
 
-// model Category {
-//   id Int @id @default(autoincrement())
-//   name String?
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @updatedAt
-//   products Product[]
-// }
+model Category {
+  id Int @id @default(autoincrement())
+  name String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  products Product[]
+}
 
-// model Order {
-//   id Int @id @default(autoincrement())
-//   userId Int
-//   totalPrice Float
-//   user User @relation(fields: [userId], references: [id])
-//   orderItems OrderItem[]
-// }
+model Order {
+  id Int @id @default(autoincrement())
+  userId Int
+  totalPrice Float
+  user User @relation(fields: [userId], references: [id])
+  orderItems OrderItem[]
+}
 
-// model OrderItem {
-//   id        Int      @id @default(autoincrement())
-//   orderId   Int
-//   productId Int
-//   quantity  Int
-//   order     Order    @relation(fields: [orderId], references: [id])
-//   product   Product  @relation(fields: [productId], references: [id])
-// }
+model OrderItem {
+  id        Int      @id @default(autoincrement())
+  orderId   Int
+  productId Int
+  quantity  Int
+  order     Order    @relation(fields: [orderId], references: [id])
+  product   Product  @relation(fields: [productId], references: [id])
+}
 
-// model Cart {
-//   id Int @id @default(autoincrement())
-//   userId Int
-//   productId Int
-//   quantity Int
-//   user User @relation(fields: [userId], references: [id])
-//   product Product @relation(fields: [productId], references: [id])
-// }
+model Cart {
+  id Int @id @default(autoincrement())
+  userId Int
+  productId Int
+  quantity Int
+  user User @relation(fields: [userId], references: [id])
+  product Product @relation(fields: [productId], references: [id])
+}
