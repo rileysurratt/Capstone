@@ -108,7 +108,7 @@ jobs:
       # Deploy Prisma migrations
       - name: Deploy Prisma Migrations
         run: |
-          cd databse
+          cd database
           npx prisma migrate deploy
         env:
           DATABASE_URL: "postgresql://computers_854o_user:CPXFTlhdF4DNWGON2JolT0bEXisVIwL0@dpg-cq6hnu2ju9rs73e83hhg-a.oregon-postgres.render.com/computers_854o"  # Database URL stored as a GitHub secret
