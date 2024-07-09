@@ -43,27 +43,30 @@ jobs:
         with:
           node-version: 20
 
-      # Install project dependencies
-      - name: Install dependencies
-        run: npm ci
-        working-directory: ./database
+      # # Install project dependencies
+      # - name: Install dependencies
+      #   run: npm ci
+      #   working-directory: ./database
 
 
       # Configure Git for commit
       - name: Configure Git
         run: |
+          cd database
           git config --global user.email "${{ secrets.GIT_USER_EMAIL }}"
           git config --global user.name "${{ secrets.GIT_USER_NAME }}"
 
       # Bump version and create changelog
       - name: Bump Version and Create Changelog
         run: npm run release
+        working-directory: database
         env:
           GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
       
       # Push changes to the repository
       - name: Push Changes
         run: |
+          cd database
           git push --follow-tags origin main
 
       # Authenticate with npm and publish the package
