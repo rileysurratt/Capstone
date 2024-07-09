@@ -46,6 +46,8 @@ jobs:
       # Install project dependencies
       - name: Install dependencies
         run: npm ci
+        working-directory: ./database
+
 
       # Configure Git for commit
       - name: Configure Git
