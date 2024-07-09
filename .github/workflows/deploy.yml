@@ -77,7 +77,7 @@ jobs:
       - name: Push Changes
         run: |
           cd database
-          git push --follow-tags origin main
+        
 
       # Authenticate with npm and publish the package
       - name: Authenticate and Publish
