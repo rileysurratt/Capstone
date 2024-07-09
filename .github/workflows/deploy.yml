@@ -107,7 +107,7 @@ jobs:
 
       # Deploy Prisma migrations
       - name: Deploy Prisma Migrations
-        run:
+        run: |
           cd databse
           npx prisma migrate deploy
         env:
