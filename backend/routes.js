@@ -1,0 +1,1 @@
+// import all routes from routes folder to export them to server.js 
