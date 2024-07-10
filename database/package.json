@@ -9,7 +9,9 @@
   "scripts": {
     "generate": "npx prisma generate",
     "postinstall": "npm run generate",
-    "release": "standard-version"
+    "release": "standard-version",
+    "start": "node server.js",
+    "seed": "node seed/seed.js"
   },
   "keywords": [],
   "author": "",
