@@ -39,8 +39,8 @@ model Product {
   description String
   price Float?
   quantity Int
-  catgoryId Int
-  category Category @relation(fields: [catgoryId], references: [id])
+  categoryId Int
+  category Category @relation(fields: [categoryId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   cartItems Cart[]
