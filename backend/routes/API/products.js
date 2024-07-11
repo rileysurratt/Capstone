@@ -1,6 +1,6 @@
-const { PrismaClient } = require("@prisma/client");
+const { PrismaClient } = require("capstone-database");
 const prisma = new PrismaClient();
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 
 
@@ -24,4 +24,4 @@ router.get("/products", async (req, res) => {
 
 // DELETE delete a product (admin)
 
-modeule.exports = router;
+module.exports = router;
