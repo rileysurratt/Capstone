@@ -1,6 +1,6 @@
 {
   "name": "capstone-database",
-  "version": "1.0.3",
+  "version": "1.0.17",
   "description": "Database repo for capstone",
   "main": "index.js",
   "publishConfig": {
@@ -10,7 +10,6 @@
     "generate": "npx prisma generate",
     "postinstall": "npm run generate",
     "release": "standard-version",
-    "start": "node server.js",
     "seed": "node seed/seed.js"
   },
   "keywords": [],
