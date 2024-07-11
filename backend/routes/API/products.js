@@ -17,6 +17,20 @@ router.get("/products", async (req, res) => {
     });
 
 // GET product by id
+router.get("/products/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const product = await prisma.product.findUnique({
+            where: {
+                id: parseInt(id)
+            }
+        })
+        res.status(200).json(product);
+    } catch {
+        console.error(error);
+        res.status(500).json({ error: "Internal server error"})
+    }
+})
 
 // PUT update a product (admin)
 
