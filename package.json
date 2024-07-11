@@ -3,6 +3,10 @@
   "version": "1.0.15",
   "description": "Database repo for capstone",
   "main": "index.js",
+  "files": [
+    "database/schema.prisma",
+    "database/prisma"
+  ],
   "publishConfig": {
     "access": "public"
   },
