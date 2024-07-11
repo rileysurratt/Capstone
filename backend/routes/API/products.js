@@ -24,4 +24,4 @@ router.get("/products", async (req, res) => {
 
 // DELETE delete a product (admin)
 
-modeule.exports = router;
+module.exports = router;
