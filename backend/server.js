@@ -5,13 +5,17 @@ const PORT = process.env.PORT || 3000; //port number that vite runs on, change l
 require('dotenv').config();
 
 const productRoutes = require('./routes/API/products');
-// const userRoutes = require('./routes/API/users');
+
+const userRoutes = require('./routes/API/users');
+const authRoutes = require('./routes/API/auth');
 const category = require('./routes/API/category')
 app.use(express.json());
 
 app.use('/api', productRoutes);
-// app.use('/api', userRoutes);
+app.use('/api', userRoutes);
+app.use('/api/auth', authRoutes);
 app.use('/api', category);
+
 
 app.listen(PORT, () => {
     console.log(`server is running on port ${PORT}`);
@@ -19,6 +23,4 @@ app.listen(PORT, () => {
 
 module.exports = app;
 
-
-// routes
 
