@@ -2,11 +2,11 @@ const { PrismaClient } = require("capstone-database");
 const prisma = new PrismaClient();
 const express = require('express');
 const router = express.Router();
+import { authenticateAndAuthorize } from "../../middleware/authMiddleware";
 
-// AMD Ryzen 9 5900X
 
 // GET all products
-router.get("/products", async (req, res) => {
+router.get("/products", authenticateAndAuthorize("ADMIN", "USER"), async (req, res) => {
     try {
         const products = await prisma.product.findMany();
         res.status(200).json(products);
@@ -17,7 +17,7 @@ router.get("/products", async (req, res) => {
     });
 
 // GET product by id
-router.get("/products/:id", async (req, res) => {
+router.get("/products/:id", authenticateAndAuthorize("ADMIN", "USER"), async (req, res) => {
     try {
         const { id } = req.params;
         const product = await prisma.product.findUnique({
@@ -36,7 +36,7 @@ router.get("/products/:id", async (req, res) => {
 })
 
 // PATCH update a product (admin)
-router.patch("/products/:id", async (req, res) => {
+router.patch("/products/:id", authenticateAndAuthorize("ADMIN"), async (req, res) => {
     try {
         const { id } = req.params;
         const { name, description, price, quantity } = req.body;
@@ -59,7 +59,7 @@ router.patch("/products/:id", async (req, res) => {
 })
 
 // POST add new product (admin)
-router.post("/products", async (req, res) => {
+router.post("/products", authenticateAndAuthorize("ADMIN"), async (req, res) => {
     try {
         const { name, description, price, quantity, categoryId } = req.body;
         const product = await prisma.product.create({
@@ -75,7 +75,7 @@ router.post("/products", async (req, res) => {
 })
 
 // DELETE delete a product (admin)
-router.delete("/products/:id", async (req, res) => {
+router.delete("/products/:id", authenticateAndAuthorize("ADMIN"), async (req, res) => {
     try {
         const { id } = req.params;
         const product = await prisma.product.delete({
