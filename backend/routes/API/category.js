@@ -2,7 +2,7 @@ const { PrismaClient } = require("capstone-database");
 const prisma = new PrismaClient();
 const express = require('express');
 const router = express.Router();
-import { authenticateAndAuthorize } from "../../middleware/authMiddleware";
+const { authenticateAndAuthorize } = require("../../middleware/authMiddleware");
 
 
 // GET all categories
