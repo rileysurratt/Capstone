@@ -67,9 +67,12 @@ router.post('/login', async (req, res) => {
 
         // Compare the provided password with the stored hashed password
         const isPasswordValid = await bcrypt.compare(password, user.password);
+        console.log("password", password)
+        console.log("user.password", user.password)
+        console.log(await bcrypt.compare(password, user.password))
 
         if (!isPasswordValid) {
-            return res.status(400).json({ error: 'Invalid email or password' });
+            return res.status(400).json({ error: 'Invalid bcrypt email or password' });
         }
 
         // Generate a JWT token

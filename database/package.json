@@ -24,5 +24,8 @@
   },
   "peerDependencies": {
     "@prisma/client": ">=5"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1"
   }
 }
