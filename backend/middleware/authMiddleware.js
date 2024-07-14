@@ -14,11 +14,11 @@ function authenticateAndAuthorize(...roles) {
     // Verify the token
     jwt.verify(token, process.env.SECRET_KEY, (err, user) => {
       // If the token is invalid, send a 403 Forbidden response
-      if (err) return res.status(403).json({ message: "Forbidden" });
+      if (err) return res.status(403).json({ message: "Invalid Token" });
 
       // If the user's role is not authorized, send a 403 Forbidden response
       if (!roles.includes(user.role)) {
-        return res.status(403).json({ message: "Forbidden" });
+        return res.status(403).json({ message: "User role not authorized" });
       }
 
       // If the token is valid and the user's role is authorized, attach the user to the request
