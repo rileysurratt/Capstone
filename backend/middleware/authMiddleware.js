@@ -12,7 +12,11 @@ function authenticateAndAuthorize(...roles) {
     if (!token) return res.status(401).json({ message: "Authentication failed" });
 
     // Verify the token
-    jwt.verify(token, process.env.SECRET_KEY, (err, user) => {
+    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+      console.log(token)
+      console.log(user)
+      console.log(process.env.JWT_SECRET)
+      console.log(user.role)
       // If the token is invalid, send a 403 Forbidden response
       if (err) return res.status(403).json({ message: "Invalid Token" });
 
