@@ -101,6 +101,13 @@ function Login() {
           />
           <br />
           <Button
+            variant="secondary"
+            className="ml-2"
+            onClick={() => navigate(`/cart`)}
+          >
+            My Cart
+          </Button>
+          <Button
             type="submit"
             variant="secondary"
             color="primary"
