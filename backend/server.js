@@ -7,10 +7,10 @@ require('dotenv').config();
 const cors = require('cors');
 
 const productRoutes = require('./routes/API/products');
-
 const userRoutes = require('./routes/API/users');
 const authRoutes = require('./routes/API/auth');
 const category = require('./routes/API/category')
+const cartRoutes = require('./routes/API/cart'); // Import cart routes
 
 //CORS to allow both localhosts to work in unison
 app.use(cors());
@@ -21,6 +21,7 @@ app.use('/api', productRoutes);
 app.use('/api', userRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api', category);
+app.use('/api/cart', cartRoutes); // Mount cart routes at /api/cart
 
 
 app.listen(PORT, () => {
