@@ -126,6 +126,9 @@ function Login() {
       ) : (
         <div style={{ marginTop: "20px" }}>
           <h3>Welcome In!</h3>
+          <Button variant="secondary" onClick={() => navigate("/cart")}>
+            My Cart
+          </Button>
           <Button variant="secondary" onClick={() => navigate("/account")}>
             My Account
           </Button>
