@@ -6,7 +6,7 @@ const { authenticateAndAuthorize } = require("../../middleware/authMiddleware");
 
 
 // GET all products
-router.get("/products", authenticateAndAuthorize("ADMIN", "USER"), async (req, res) => {
+router.get("/products", async (req, res) => {
     try {
         const products = await prisma.product.findMany();
         res.status(200).json(products);
@@ -17,7 +17,7 @@ router.get("/products", authenticateAndAuthorize("ADMIN", "USER"), async (req, r
     });
 
 // GET product by id
-router.get("/products/:id", authenticateAndAuthorize("ADMIN", "USER"), async (req, res) => {
+router.get("/products/:id",  async (req, res) => {
     try {
         const { id } = req.params;
         const product = await prisma.product.findUnique({
