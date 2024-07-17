@@ -3,7 +3,8 @@ const jwt = require("jsonwebtoken");
 // This function will authenticate the token and authorize roles
 function authenticateAndAuthorize(...roles) {
   // Return an express middleware function
-  return (req, res, next) => {
+  return async (req, res, next) => {
+    console.log('authMiddleware: Request received');
     // Get the Authorization header
     const authHeader = req.header("Authorization");
     // Extract the token from the Authorization header
@@ -21,7 +22,7 @@ function authenticateAndAuthorize(...roles) {
       if (err) return res.status(403).json({ message: "Invalid Token" });
 
       // If the user's role is not authorized, send a 403 Forbidden response
-      if (!roles.includes(user.role)) {
+      if (roles.length > 0 && !roles.includes(user.role)) {
         return res.status(403).json({ message: "User role not authorized" });
       }
 
