@@ -1,10 +1,10 @@
 {
   "name": "capstone-database",
-  "version": "1.0.41",
+  "version": "1.0.43",
   "description": "Database repo for capstone",
   "main": "index.js",
   "files": [
-    "database/schema.prisma",
+    "database/prisma/schema.prisma",
     "database/prisma"
   ],
   "publishConfig": {
@@ -33,6 +33,7 @@
     "@emotion/styled": "^11.11.5",
     "@mui/material": "^5.16.0",
     "axios": "^1.7.2",
+    "capstone-database": "^1.0.43",
     "cors": "^2.8.5",
     "react-router-dom": "^6.24.1"
   }
