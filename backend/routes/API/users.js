@@ -7,7 +7,7 @@ const { authenticateAndAuthorize } = require("../../middleware/authMiddleware");
 
 // GET /api/users/me (Get current user's info)
 router.get('/users/me', authenticateAndAuthorize("ADMIN", "USER"), async (req, res) => {
-    console.log('req.user:', req.user);
+    // console.log('req.user:', req.user);
     try {
         const userId = req.user.id; // Assuming authentication middleware sets req.user
 
@@ -16,7 +16,7 @@ router.get('/users/me', authenticateAndAuthorize("ADMIN", "USER"), async (req, r
         });
 
         if (user) {
-            res.json(user);
+            res.json({ user, role: req.user.role });
         } else {
             res.status(404).json({ error: 'User not found' });
         }

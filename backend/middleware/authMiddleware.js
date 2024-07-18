@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 function authenticateAndAuthorize(...roles) {
   // Return an express middleware function
   return async (req, res, next) => {
-    console.log('authMiddleware: Request received');
+    // console.log('authMiddleware: Request received');
     // Get the Authorization header
     const authHeader = req.header("Authorization");
     // Extract the token from the Authorization header
@@ -14,10 +14,10 @@ function authenticateAndAuthorize(...roles) {
 
     // Verify the token
     jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-      console.log(token)
-      console.log(user)
-      console.log(process.env.JWT_SECRET)
-      console.log(user.role)
+      // console.log(token)
+      // console.log(user)
+      // console.log(process.env.JWT_SECRET)
+      // console.log(user.role)
       // If the token is invalid, send a 403 Forbidden response
       if (err) return res.status(403).json({ message: "Invalid Token" });
 
