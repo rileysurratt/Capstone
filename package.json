@@ -1,6 +1,6 @@
 {
   "name": "capstone-database",
-  "version": "1.0.28",
+  "version": "1.0.35",
   "description": "Database repo for capstone",
   "main": "index.js",
   "files": [
@@ -32,6 +32,7 @@
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@mui/material": "^5.16.0",
+    "axios": "^1.7.2",
     "cors": "^2.8.5",
     "react-router-dom": "^6.24.1"
   }

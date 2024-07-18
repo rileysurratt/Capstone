@@ -101,6 +101,13 @@ function Login() {
           />
           <br />
           <Button
+            variant="secondary"
+            className="ml-2"
+            onClick={() => navigate(`/cart`)}
+          >
+            My Cart
+          </Button>
+          <Button
             type="submit"
             variant="secondary"
             color="primary"
@@ -119,6 +126,9 @@ function Login() {
       ) : (
         <div style={{ marginTop: "20px" }}>
           <h3>Welcome In!</h3>
+          <Button variant="secondary" onClick={() => navigate("/cart")}>
+            My Cart
+          </Button>
           <Button variant="secondary" onClick={() => navigate("/account")}>
             My Account
           </Button>

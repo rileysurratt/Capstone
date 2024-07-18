@@ -1,6 +1,7 @@
 import "./App.css";
 import Aboutus from "./components/Router/Aboutus";
 import Account from "./components/Router/Account";
+import Cart from "./components/Router/Cart";
 import Catalog from "./components/Router/Catalog";
 import Contactus from "./components/Router/Contactus";
 import Footer from "./components/Router/Footer";
@@ -44,6 +45,7 @@ function App() {
           <Route path="/" element={<HomePage footerLinks={footerLinks} />} />
           <Route path="/aboutus" element={<Aboutus />} />
           <Route path="/account" element={<Account />} />
+          <Route path="/cart" element={<Cart />} />
           <Route path="/catalog" element={<Catalog />} />
           <Route path="/contactus" element={<Contactus />} />
           <Route path="/orderhistory" element={<History />} />
