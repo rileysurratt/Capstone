@@ -10,8 +10,11 @@ function authenticateAndAuthorize(...roles) {
     // Extract the token from the Authorization header
     const token = authHeader && authHeader.split(" ")[1];
     // If there's no token, send a 401 Unauthorized response
-    if (!token) return res.status(401).json({ message: "Authentication failed" });
-
+    if (!token) {
+      req.user = null;
+      return next();
+      // return res.status(401).json({ message: "Authentication failed" });
+    }
     // Verify the token
     jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
       // console.log(token)
