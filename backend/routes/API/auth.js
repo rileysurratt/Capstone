@@ -72,45 +72,45 @@ router.post('/login', async (req, res) => {
             return res.status(400).json({ error: 'Invalid bcrypt email or password' });
         }
 
-    //     // Merge guest cart with user cart
-    //     const guestId = req.cookies.guestId;
-    //     if (guestId) {
-    //         const guestCartItems = await prisma.cart.findMany({
-    //             where: { guestId }
-    //         });
+        // Merge guest cart with user cart
+        const guestId = req.cookies.guestId;
+        if (guestId) {
+            const guestCartItems = await prisma.cart.findMany({
+                where: { guestId }
+            });
 
-    //         for (let item of guestCartItems) {
-    //             // Check if item already exists in user cart
-    //             const existingItem = await prisma.cart.findFirst({
-    //                 where: {
-    //                     userId: user.id,
-    //                     productId: item.productId
-    //                 }
-    //             });
+            for (let item of guestCartItems) {
+                // Check if item already exists in user cart
+                const existingItem = await prisma.cart.findFirst({
+                    where: {
+                        userId: user.id,
+                        productId: item.productId
+                    }
+                });
 
-    //             if (existingItem) {
-    //                 // Update quantity if item already exists
-    //                 await prisma.cart.update({
-    //                     where: { id: existingItem.id },
-    //                     data: { quantity: existingItem.quantity + item.quantity}
-    //                 });
-    //             } else {
-    //                 // Add item to user cart if it doesn't exist
-    //                 await prisma.cart.create({
-    //                     data: {
-    //                         userId: user.id,
-    //                         productId: item.productId,
-    //                         quantity: item.quantity
-    //                     }
-    //                 });
-    //             }
-    //     }
+                if (existingItem) {
+                    // Update quantity if item already exists
+                    await prisma.cart.update({
+                        where: { id: existingItem.id },
+                        data: { quantity: existingItem.quantity + item.quantity}
+                    });
+                } else {
+                    // Add item to user cart if it doesn't exist
+                    await prisma.cart.create({
+                        data: {
+                            userId: user.id,
+                            productId: item.productId,
+                            quantity: item.quantity
+                        }
+                    });
+                }
+        }
 
-    //     // Delete guest cart items
-    //     await prisma.cart.deleteMany({
-    //         where: { guestId }
-    //     });
-    // }
+        // Delete guest cart items
+        await prisma.cart.deleteMany({
+            where: { guestId }
+        });
+    }
 
         // Generate a JWT token
         const token = jwt.sign({ id: user.id, email: user.email, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
