@@ -75,9 +75,10 @@ model OrderItem {
 
 model Cart {
   id Int @id @default(autoincrement())
-  userId Int
+  userId Int?
   productId Int
   quantity Int
-  user User @relation(fields: [userId], references: [id])
+  guestId String?
+  user User? @relation(fields: [userId], references: [id])
   product Product @relation(fields: [productId], references: [id])
 }

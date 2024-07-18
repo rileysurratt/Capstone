@@ -5,6 +5,8 @@ const PORT = process.env.PORT || 3000; //port number that vite runs on, change l
 require('dotenv').config();
 //CORS to allow localhost 3000 to communicate with the frontend
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
+
 
 const productRoutes = require('./routes/API/products');
 const userRoutes = require('./routes/API/users');
@@ -14,14 +16,15 @@ const cartRoutes = require('./routes/API/cart'); // Import cart routes
 
 //CORS to allow both localhosts to work in unison
 app.use(cors());
-
 app.use(express.json());
+app.use(cookieParser());
+
 
 app.use('/api', productRoutes);
 app.use('/api', userRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api', category);
-app.use('/api/cart', cartRoutes); // Mount cart routes at /api/cart
+app.use('/api', cartRoutes); // Mount cart routes at /api/cart
 
 
 app.listen(PORT, () => {
