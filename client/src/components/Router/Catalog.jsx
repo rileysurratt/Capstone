@@ -1,4 +1,7 @@
 // All Products
+// add to cart button, details button
+// name, price, quantity 
+// TODO: add images to products
 
 import { useState } from "react";
 import { useEffect } from "react";
@@ -7,17 +10,13 @@ const Catalog = () => {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [token, setToken] = useState(localStorage.getItem('token'))
+  const [categories, setCategories] = useState([])
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         setLoading(true)
-        const response = await fetch("http://localhost:3000/api/products/", {
-          headers: {
-            'Content-Type': 'application/json',
-          }
-        });
+        const response = await fetch("http://localhost:3000/api/products/");
         const data = await response.json();
 
         setProducts(data);
@@ -28,24 +27,47 @@ const Catalog = () => {
         setLoading(false)
       }
     };
-    fetchProducts();
-  }, []);
 
+  const fetchCategories = async () => {
+    try {
+      const response = await fetch("http://localhost:3000/api/category/");
+      const data = await response.json();
 
-    return (
-      <>
-      {loading ? (
-        <h1>Loading...</h1>
-      ) : (
-        <div>
-          {products.map((product) =>  (
-            <div key={product.id}>{product.name}</div>
-          ) )}
-        </div>
-      )}
-      </>
-    );
+      setCategories(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
-  
-  export default Catalog;
-  
+
+  fetchProducts();
+  fetchCategories();
+}, []);
+
+return (
+  <>
+    {loading? (
+      <h1>Loading...</h1>
+    ) : (
+      <div>
+        {categories.map((category) => (
+          <div key={category.id}>
+            <h1>{category.name}</h1>
+            <ul>
+              {products.filter((product) => product.categoryId === category.id).map((product) => (
+                  <li key={product.id}>
+                    <h3>{product.name}</h3>
+                    <p>Price: {product.price}</p>
+                    <p>Quantity: {product.quantity}</p>
+                    {/* Add to cart button, details button */}
+                  </li>
+                ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    )}
+  </>
+);
+}
+
+export default Catalog;

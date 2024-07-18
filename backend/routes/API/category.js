@@ -6,7 +6,7 @@ const { authenticateAndAuthorize } = require("../../middleware/authMiddleware");
 
 
 // GET all categories
-router.get("/category", authenticateAndAuthorize("ADMIN", "USER"), async (req, res) => {
+router.get("/category", async (req, res) => {
     try {
         const category = await prisma.category.findMany();
         res.status(200).json(category);
