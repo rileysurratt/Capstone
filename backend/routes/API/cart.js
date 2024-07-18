@@ -12,7 +12,7 @@ const getCartItems = async (identifier, isGuest = false) => {
   const whereClause = isGuest ? { guestId: identifier } : { userId: identifier };
   console.log('whereClause',whereClause);
   return await prisma.cart.findMany({
-    where: {guestId:'eb632ff7-9e49-414c-b809-c40d74cf420e'},
+    where: whereClause,
     include: { product: true }
   });
 };
