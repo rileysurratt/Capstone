@@ -1,6 +1,6 @@
 {
   "name": "capstone-database",
-  "version": "1.0.41",
+  "version": "1.0.43",
   "description": "Database repo for capstone",
   "main": "index.js",
   "publishConfig": {
@@ -27,6 +27,6 @@
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
-    "capstone-database": "^1.0.29"
+    "capstone-database": "^1.0.43"
   }
 }
