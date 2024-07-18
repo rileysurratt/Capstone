@@ -55,9 +55,11 @@ return (
             <ul>
               {products.filter((product) => product.categoryId === category.id).map((product) => (
                   <li key={product.id}>
-                    <h3>{product.name}</h3>
+                    <h2>Name: {product.name}</h2>
                     <p>Price: {product.price}</p>
                     <p>Quantity: {product.quantity}</p>
+                    <button>Details</button>
+                    <button>Add to cart</button>
                     {/* Add to cart button, details button */}
                   </li>
                 ))}
