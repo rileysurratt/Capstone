@@ -1,75 +1,89 @@
 // All Products
 // add to cart button, details button
-// name, price, quantity 
+// name, price, quantity
 // TODO: add images to products
 
 import { useState } from "react";
 import { useEffect } from "react";
+import { useNavigate } from 'react-router-dom'
+
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import Button from "@mui/material/Button";
 
 const Catalog = () => {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [categories, setCategories] = useState([])
+  const [categories, setCategories] = useState([]);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        setLoading(true)
+        setLoading(true);
         const response = await fetch("http://localhost:3000/api/products/");
-        const data = await response.json();
+        const result = await response.json();
 
-        setProducts(data);
-        console.log(data)
-        setLoading(false)
+        setProducts(result);
+        // console.log(result);
+        setLoading(false);
       } catch (error) {
         console.log(error);
-        setLoading(false)
+        setLoading(false);
       }
     };
 
-  const fetchCategories = async () => {
-    try {
-      const response = await fetch("http://localhost:3000/api/category/");
-      const data = await response.json();
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/api/category/");
+        const result = await response.json();
 
-      setCategories(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+        setCategories(result);
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-  fetchProducts();
-  fetchCategories();
-}, []);
+    fetchProducts();
+    fetchCategories();
+  }, []);
 
-return (
-  <>
-    {loading? (
-      <h1>Loading...</h1>
-    ) : (
-      <div>
-        {categories.map((category) => (
-          <div key={category.id}>
-            <h1>{category.name}</h1>
-            <ul>
-              {products.filter((product) => product.categoryId === category.id).map((product) => (
-                  <li key={product.id}>
-                    <h2>Name: {product.name}</h2>
-                    <p>Price: {product.price}</p>
-                    <p>Quantity: {product.quantity}</p>
-                    <button>Details</button>
-                    <button>Add to cart</button>
-                    {/* Add to cart button, details button */}
-                  </li>
-                ))}
-            </ul>
-          </div>
-        ))}
-      </div>
-    )}
-  </>
-);
-}
+  return (
+    <>
+      {loading ? (
+        <h1>Loading...</h1>
+      ) : (
+        <div>
+          {categories.map((category) => (
+            <div key={category.id}>
+              <h1>{category.name}</h1>
+              <div>
+                {products
+                  .filter((product) => product.categoryId === category.id)
+                  .map((product) => (
+                    <Card key={product.id} sx={{ maxWidth: 350, maxHeight: 200 }}>
+                      <CardContent>
+                        <h2>{product.name}</h2>
+                        <p>Price: {product.price}</p>
+                        <p>Quantity: {product.quantity}</p>
+                        {/* Add to cart button, details button */}
+                        <Button onClick={() => navigate(`/products/${product.id}`)}>Details</Button>
+                        <Button>Add to cart</Button>
+                      </CardContent>
+                    </Card>
+                  ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </>
+  );
+};
 
 export default Catalog;
