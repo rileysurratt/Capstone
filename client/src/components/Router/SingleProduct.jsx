@@ -1,5 +1,13 @@
+// Single Product page
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from 'react-router-dom'
+
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import Button from "@mui/material/Button";
 
 const SingleProduct = () => {
     const [product, setProduct] = useState(null);
@@ -56,16 +64,16 @@ const SingleProduct = () => {
             <h1>{error}</h1>
         ) : product ? (
             <div>
-                <div>
-                    <div>
+                <Card>
+                    <CardContent>
                         <h1>{product.name}</h1>
                         <h5>Description: {product.description}</h5>
                         <h5>Price: {product.price}</h5>
-                        <h5>Availibility: {product.available ? "In stock" : "Out of stock"}</h5>
+                        <h5>Availibility: {product.quantity > 0 ? "In stock" : "Out of stock"}</h5>
                         <button onClick={addToCart}>Add to cart</button>
                         <button onClick={() => navigate('/catalog')}>All products</button>
-                    </div>
-                </div>
+                    </CardContent>
+                </Card>
             </div>
         ) : (
             <h1>Loading ...</h1>
