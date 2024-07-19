@@ -57,6 +57,52 @@ router.get('/users/:id', async (req, res) => {
     }
 });
 
+// PATCH /api/users/:id (Update a user's info)
+router.patch('/users/:id', authenticateAndAuthorize("ADMIN", "USER"), async (req, res) => {
+    const { id } = req.params;
+    const { email, name, address, role } = req.body;
+
+    try {
+        // Ensure only admins can change the role
+        if (role && req.user.role !== 'ADMIN') {
+            return res.status(403).json({ error: 'Unauthorized to change role' });
+        }
+
+        const updatedUser = await prisma.user.update({
+            where: { id: parseInt(id, 10) },
+            data: { email, name, address, role }
+        });
+
+        if (updatedUser) {
+            res.json(updatedUser);
+        } else {
+            res.status(404).json({ error: 'User not found' });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+// DELETE /api/users/:id (Delete a user)
+router.delete('/users/:id', authenticateAndAuthorize("ADMIN"), async (req, res) => {
+    const { id } = req.params;
+    try {
+        // Only admins can delete users
+        const deletedUser = await prisma.user.delete({
+            where: { id: parseInt(id, 10) },
+        });
+
+        if (deletedUser) {
+            res.json({ message: 'User successfully deleted' });
+        } else {
+            res.status(404).json({ error: 'User not found' });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 
 
 module.exports = router;
