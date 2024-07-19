@@ -2,23 +2,80 @@
 //Order History Linked Here
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Button } from "react-bootstrap";
+import { Dropdown, Button } from "react-bootstrap";
 
 const Account = () => {
+  //Retrieve Logged User
   const [user, setUser] = useState(null);
+  //Create Category
   const [categoryName, setCategoryName] = useState("");
-
+  //Create Product
   const [productName, setproductName] = useState("");
   const [productDesc, setproductDesc] = useState("");
   const [productPrice, setproductPrice] = useState("");
   const [productQty, setproductQty] = useState("");
   const [catId, setCatId] = useState("");
+  //Admin to get users, products, categories
+  const [users, setUsers] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
 
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const { id } = useParams();
   const navigate = useNavigate();
+
+  //Get Users
+  useEffect(() => {
+    async function getUsers() {
+      try {
+        const response = await fetch("http://localhost:3000/api/users");
+        const data = await response.json();
+        setUsers(data);
+        console.log(data);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+        setLoading(false);
+      }
+    }
+    getUsers();
+  }, []);
+
+  //Get Products
+  useEffect(() => {
+    async function getProducts() {
+      try {
+        const response = await fetch("http://localhost:3000/api/products");
+        const data = await response.json();
+        setProducts(data);
+        console.log(data);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+        setLoading(false);
+      }
+    }
+    getProducts();
+  }, []);
+
+  //Get Categories
+  useEffect(() => {
+    async function getCategory() {
+      try {
+        const response = await fetch("http://localhost:3000/api/category");
+        const data = await response.json();
+        setCategories(data);
+        console.log(data);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+        setLoading(false);
+      }
+    }
+    getCategory();
+  }, []);
 
   //Create Category
   const handleSubmit = async (event) => {
@@ -131,12 +188,86 @@ const Account = () => {
   }
 
   const isAdmin = user.role === "ADMIN";
-
+  //Admin First
+  //User has limited view
   return (
     <>
       {isAdmin ? (
         <div>
           <h1>Admin User</h1>
+          <Dropdown>
+            <Dropdown.Toggle id="dropdown-basic">Users</Dropdown.Toggle>
+            <Dropdown.Menu>
+              {users.map((user) => (
+                <Dropdown.Item key={user.id}>
+                  <div>
+                    <strong>Email:</strong> {user.email}
+                  </div>
+                  <div>
+                    <strong>Name:</strong> {user.name}
+                  </div>
+                  <div>
+                    <strong>Address:</strong> {user.address}
+                  </div>
+                  <div>
+                    <strong>Role:</strong> {user.role}
+                  </div>
+                  <div>
+                    <Button variant="primary">User Page</Button>
+                  </div>
+                </Dropdown.Item>
+              ))}
+            </Dropdown.Menu>
+          </Dropdown>
+          <Dropdown>
+            <Dropdown.Toggle variant="success" id="dropdown-basic">
+              Products
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              {products.map((products) => (
+                <Dropdown.Item key={products.id}>
+                  <div>
+                    <strong>Name:</strong> {products.name}
+                  </div>
+                  <div>
+                    <strong>Desc:</strong> {products.description}
+                  </div>
+                  <div>
+                    <strong>Price:</strong> {products.price}
+                  </div>
+                  <div>
+                    <strong>Quantity:</strong> {products.quantity}
+                  </div>
+                  <div>
+                    <strong>Category ID:</strong> {products.categoryId}
+                  </div>
+                  <div>
+                    <Button variant="primary">Product Page</Button>
+                  </div>
+                </Dropdown.Item>
+              ))}
+            </Dropdown.Menu>
+          </Dropdown>
+          <Dropdown>
+            <Dropdown.Toggle variant="danger" id="dropdown-basic">
+              Categories
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              {categories.map((categories) => (
+                <Dropdown.Item key={categories.id}>
+                  <div>
+                    <strong>Category Name:</strong> {categories.name}
+                  </div>
+                  <div>
+                    <strong>Category ID:</strong> {categories.id}
+                  </div>
+                  <div>
+                    <Button variant="primary">Category Page</Button>
+                  </div>
+                </Dropdown.Item>
+              ))}
+            </Dropdown.Menu>
+          </Dropdown>
           <h3>
             <b>Create a Category</b>
           </h3>
