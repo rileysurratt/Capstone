@@ -11,6 +11,7 @@ import Request from "./components/Router/Request";
 import Review from "./components/Router/Review";
 import Navigation from "./components/Router/Navigation";
 import Login from "./components/Router/Login";
+import SingleProduct from "./components/Router/SingleProduct";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
           <Route path="/account" element={<Account />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/catalog" element={<Catalog />} />
+          <Route path="/products/:id" element={<SingleProduct />} />
           <Route path="/contactus" element={<Contactus />} />
           <Route path="/orderhistory" element={<History />} />
           <Route path="/register" element={<Register />} />
