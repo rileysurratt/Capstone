@@ -1,6 +1,7 @@
 // Single Product page
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from 'react-router-dom'
+import Cookies from 'js-cookie';
 
 import * as React from "react";
 import Box from "@mui/material/Box";
@@ -45,14 +46,13 @@ const SingleProduct = () => {
         console.log('Add to Cart button clicked');
         try {
             const token = localStorage.getItem('token'); // Assuming token is stored in localStorage
-            if (!token) {
-                throw new Error('User not authenticated');
-            }
+            const guestId = Cookies.get('guestId'); // For guests
+
             const response = await fetch(`http://localhost:3000/api/cart`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': token ? `Bearer ${token}` : undefined // Include token if present
                 },
                 body: JSON.stringify({ productId: product.id, quantity: parseInt(quantity) })
             });
