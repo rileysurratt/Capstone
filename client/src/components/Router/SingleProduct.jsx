@@ -46,7 +46,7 @@ const SingleProduct = () => {
             const response = await fetch(`http://localhost:3000/api/cart`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json' },
-                body: JSON.stringify({ productId: product.id, quantity: parseInt(quantity) })
+                body: JSON.stringify({ productId: product.id, quantity: quantity })
             });
 
             if (!response.ok) {
