@@ -1,6 +1,8 @@
 import "./App.css";
 import Aboutus from "./components/Router/Aboutus";
 import Account from "./components/Router/Account";
+import AdminCategory from "./components/Router/AdminCategory";
+import AdminUser from "./components/Router/AdminUser";
 import Cart from "./components/Router/Cart";
 import Catalog from "./components/Router/Catalog";
 import Contactus from "./components/Router/Contactus";
@@ -46,6 +48,8 @@ function App() {
           <Route path="/" element={<HomePage footerLinks={footerLinks} />} />
           <Route path="/aboutus" element={<Aboutus />} />
           <Route path="/account" element={<Account />} />
+          <Route path="/users/:id" element={<AdminUser />} />
+          <Route path="/category/:id" element={<AdminCategory />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/catalog" element={<Catalog />} />
           <Route path="/products/:id" element={<SingleProduct />} />

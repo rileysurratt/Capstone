@@ -213,7 +213,7 @@ const Account = () => {
                     <strong>Role:</strong> {user.role}
                   </div>
                   <div>
-                    <Button variant="primary">User Page</Button>
+                    <Button variant="primary" onClick={() => navigate(`/users/${id}`)}>User Page</Button>
                   </div>
                 </Dropdown.Item>
               ))}
@@ -242,7 +242,8 @@ const Account = () => {
                     <strong>Category ID:</strong> {products.categoryId}
                   </div>
                   <div>
-                    <Button variant="primary">Product Page</Button>
+                    <Button variant="primary"
+                    onClick={() => navigate(`/products/${products.id}}`)}>Product Page</Button>
                   </div>
                 </Dropdown.Item>
               ))}
@@ -262,7 +263,7 @@ const Account = () => {
                     <strong>Category ID:</strong> {categories.id}
                   </div>
                   <div>
-                    <Button variant="primary">Category Page</Button>
+                    <Button variant="primary" onClick={() => navigate(`/category/:id`)}>Category Page</Button>
                   </div>
                 </Dropdown.Item>
               ))}
