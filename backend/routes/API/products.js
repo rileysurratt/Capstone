@@ -28,12 +28,12 @@ router.get("/products/:id",  async (req, res) => {
         if (!product) {
             res.status(404).json({ error: "Product not found" });
         }
-        res.status(201).json(product);
-    } catch {
-        console.error(error);
-        res.status(500).json({ error: "Internal server error"})
+        res.status(200).json(product);
+    } catch (error) { 
+      console.error(error);
+      res.status(500).json({ error: "Internal server error" });
     }
-})
+  });
 
 // PATCH update a product (admin)
 router.patch("/products/:id", authenticateAndAuthorize("ADMIN"), async (req, res) => {
