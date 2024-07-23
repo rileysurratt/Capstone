@@ -17,7 +17,10 @@ const Cart = () => {
 
       const response = await axios.get('http://localhost:3000/api/cart', {
         headers: token ? { Authorization: `Bearer ${token}` } : {},
+        withCredentials: true,
       });
+
+      console.log('API Response:', response.data); // Log the response data
 
       if (Array.isArray(response.data)) {
         setCartItems(response.data);
@@ -33,6 +36,56 @@ const Cart = () => {
     }
   };
 
+  const clearCart = async () => {
+    try {
+      const token = localStorage.getItem('token');
+
+      await axios.delete('http://localhost:3000/api/cart', {
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+        withCredentials: true,
+      });
+
+      setCartItems([]);
+      setTotal(0);
+    } catch (error) {
+      console.error('Error clearing cart:', error);
+    }
+  };
+
+  const updateCartItemQuantity = async (productId, quantity) => {
+    try {
+      const token = localStorage.getItem('token');
+
+      await axios.patch(
+        'http://localhost:3000/api/cart',
+        { productId, quantity },
+        {
+          headers: token ? { Authorization: `Bearer ${token}` } : {},
+          withCredentials: true,
+        }
+      );
+
+      fetchCartItems();
+    } catch (error) {
+      console.error('Error updating cart item quantity:', error);
+    }
+  };
+
+  const removeCartItem = async (productId) => {
+    try {
+      const token = localStorage.getItem('token');
+
+      await axios.delete(`http://localhost:3000/api/cart/${productId}`, {
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+        withCredentials: true,
+      });
+
+      fetchCartItems();
+    } catch (error) {
+      console.error('Error removing cart item:', error);
+    }
+  };
+
   useEffect(() => {
     fetchCartItems();
   }, []);
@@ -44,7 +97,15 @@ const Cart = () => {
         <ul>
           {cartItems.map((item) => (
             <li key={item.id}>
-              {item.product.name} - {item.quantity} x ${item.product.price.toFixed(2)}
+              {item.product.name} - 
+              <input
+                type="number"
+                value={item.quantity}
+                onChange={(e) => updateCartItemQuantity(item.product.id, parseInt(e.target.value))}
+                min="1"
+              />
+              x ${item.product.price.toFixed(2)}
+              <button onClick={() => removeCartItem(item.product.id)}>Remove</button>
             </li>
           ))}
         </ul>
@@ -52,8 +113,12 @@ const Cart = () => {
         <p>Your cart is empty</p>
       )}
       <h2>Total: ${total.toFixed(2)}</h2>
+      {cartItems.length > 0 && (
+        <button onClick={clearCart}>Clear Cart</button>
+      )}
     </div>
   );
 };
+
 
 export default Cart;
