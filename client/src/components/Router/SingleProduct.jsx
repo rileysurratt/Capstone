@@ -16,6 +16,7 @@ const SingleProduct = () => {
     const [message, setMessage] = useState(null);
     const { id } = useParams();
     const navigate = useNavigate();
+    const [quantity, setQuantity] = useState(1)
 
     useEffect(() => {
         const getProduct = async () => {
@@ -39,11 +40,13 @@ const SingleProduct = () => {
         }
         getProduct();
     }, []);
-
+// product id and quantity in the body of post request
     const addToCart = async () => {
         try {
             const response = await fetch(`http://localhost:3000/api/cart`, {
                 method: 'POST',
+                headers: {'Content-Type': 'application/json' },
+                body: JSON.stringify({ productId: product.id, quantity: quantity })
             });
 
             if (!response.ok) {
@@ -70,6 +73,7 @@ const SingleProduct = () => {
                         <h5>Description: {product.description}</h5>
                         <h5>Price: {product.price}</h5>
                         <h5>Availibility: {product.quantity > 0 ? "In stock" : "Out of stock"}</h5>
+                        <input type="number" label="quantity" value={quantity} onChange={(e) => setQuantity(e.target.value)}></input>
                         <button onClick={addToCart}>Add to cart</button>
                         <button onClick={() => navigate('/catalog')}>All products</button>
                     </CardContent>
