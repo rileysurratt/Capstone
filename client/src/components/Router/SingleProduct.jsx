@@ -65,6 +65,7 @@ const SingleProduct = () => {
             setMessage('Added to cart')
         } catch (error) {
             console.log(error)
+            setMessage('Error adding to cart')
         }
 
     }
@@ -85,6 +86,7 @@ const SingleProduct = () => {
                         <input type="number" label="quantity" value={quantity} onChange={(e) => setQuantity(e.target.value)}></input>
                         <button onClick={addToCart}>Add to cart</button>
                         <button onClick={() => navigate('/catalog')}>All products</button>
+                        {message && (<p style={{ color: 'green'}}>{message}</p>)}
                     </CardContent>
                 </Card>
             </div>
