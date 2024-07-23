@@ -42,17 +42,26 @@ const SingleProduct = () => {
     }, []);
 // product id and quantity in the body of post request
     const addToCart = async () => {
+        console.log('Add to Cart button clicked');
         try {
+            const token = localStorage.getItem('token'); // Assuming token is stored in localStorage
+            if (!token) {
+                throw new Error('User not authenticated');
+            }
             const response = await fetch(`http://localhost:3000/api/cart`, {
                 method: 'POST',
-                headers: {'Content-Type': 'application/json' },
-                body: JSON.stringify({ productId: product.id, quantity: quantity })
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ productId: product.id, quantity: parseInt(quantity) })
             });
 
             if (!response.ok) {
                 throw new Error('Failed to add to cart');
             }
             const result = await response.json();
+            console.log('Add to cart result:', result);
             setMessage('Added to cart')
         } catch (error) {
             console.log(error)
