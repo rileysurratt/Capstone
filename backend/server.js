@@ -14,8 +14,13 @@ const authRoutes = require('./routes/API/auth');
 const category = require('./routes/API/category')
 const cartRoutes = require('./routes/API/cart'); // Import cart routes
 
+const corsOptions = {
+    origin: 'http://localhost:5173', // Frontend URL
+    credentials: true, // Allow credentials (cookies)
+  };
+
 //CORS to allow both localhosts to work in unison
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
 
