@@ -46,7 +46,7 @@ const SingleProduct = () => {
             const response = await fetch(`http://localhost:3000/api/cart`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json' },
-                body: JSON.stringify({ productId: product.id, quantity: quantity })
+                body: JSON.stringify({ productId: product.id, quantity: parseInt(quantity) })
             });
 
             if (!response.ok) {
@@ -56,6 +56,7 @@ const SingleProduct = () => {
             setMessage('Added to cart')
         } catch (error) {
             console.log(error)
+            setMessage('Error adding to cart')
         }
 
     }
@@ -76,6 +77,7 @@ const SingleProduct = () => {
                         <input type="number" label="quantity" value={quantity} onChange={(e) => setQuantity(e.target.value)}></input>
                         <button onClick={addToCart}>Add to cart</button>
                         <button onClick={() => navigate('/catalog')}>All products</button>
+                        {message && (<p style={{ color: 'green'}}>{message}</p>)}
                     </CardContent>
                 </Card>
             </div>
