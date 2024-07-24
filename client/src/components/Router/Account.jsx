@@ -213,7 +213,7 @@ const Account = () => {
                     <strong>Role:</strong> {user.role}
                   </div>
                   <div>
-                    <Button variant="primary" onClick={() => navigate(`/users/${id}`)}>User Page</Button>
+                    <Button variant="primary" onClick={() => navigate(`/users/${user.id}`)}>User Page</Button>
                   </div>
                 </Dropdown.Item>
               ))}
