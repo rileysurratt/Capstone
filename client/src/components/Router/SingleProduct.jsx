@@ -146,10 +146,11 @@ const SingleProduct = () => {
   };
 
   //ADMIN DELETE
-  const handleDelete = async (id) => {
+  const handleDelete = async () => {
     try {
       await fetch(`http://localhost:3000/api/products/${id}`, {
         method: "DELETE",
+       
       });
       setProduct(null);
       setMessage("Product deleted successfully");
