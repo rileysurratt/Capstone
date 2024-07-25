@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 const AdminCategory = () => {
     return (
       <>
-      <h1>Admin Category Placeholder</h1>
+      <h1>WE FIXED THINGS</h1>
       </>
     );
   };
