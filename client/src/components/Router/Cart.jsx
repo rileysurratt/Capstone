@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -13,10 +14,12 @@ const Cart = () => {
   const fetchCartItems = async () => {
     try {
       const token = localStorage.getItem('token');
-      console.log(token)
+      const guestId = Cookies.get('guestId'); // Get the guestId from cookies
+      console.log('cart guestid',guestId)
 
       const response = await axios.get('http://localhost:3000/api/cart', {
         headers: token ? { Authorization: `Bearer ${token}` } : {},
+        params: guestId ? { guestId } : {}, // Send guestId as query param if available
         withCredentials: true,
       });
 
@@ -39,9 +42,11 @@ const Cart = () => {
   const clearCart = async () => {
     try {
       const token = localStorage.getItem('token');
+      const guestId = Cookies.get('guestId'); // Get the guestId from cookies
 
       await axios.delete('http://localhost:3000/api/cart', {
         headers: token ? { Authorization: `Bearer ${token}` } : {},
+        params: guestId ? { guestId } : {}, // Send guestId as query param if available
         withCredentials: true,
       });
 
@@ -55,12 +60,14 @@ const Cart = () => {
   const updateCartItemQuantity = async (productId, quantity) => {
     try {
       const token = localStorage.getItem('token');
+      const guestId = Cookies.get('guestId'); // Get the guestId from cookies
 
       await axios.patch(
         'http://localhost:3000/api/cart',
         { productId, quantity },
         {
           headers: token ? { Authorization: `Bearer ${token}` } : {},
+          params: guestId ? { guestId } : {}, // Send guestId as query param if available
           withCredentials: true,
         }
       );
@@ -74,9 +81,11 @@ const Cart = () => {
   const removeCartItem = async (productId) => {
     try {
       const token = localStorage.getItem('token');
+      const guestId = Cookies.get('guestId'); // Get the guestId from cookies
 
       await axios.delete(`http://localhost:3000/api/cart/${productId}`, {
         headers: token ? { Authorization: `Bearer ${token}` } : {},
+        params: guestId ? { guestId } : {}, // Send guestId as query param if available
         withCredentials: true,
       });
 
