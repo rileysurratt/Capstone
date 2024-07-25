@@ -5,7 +5,7 @@ const router = express.Router();
 const { authenticateAndAuthorize } = require("../../middleware/authMiddleware");
 const { assignGuestId } = require("../../middleware/guestMiddleware");
 
-router.use(authenticateAndAuthorize(), assignGuestId);
+router.use(authenticateAndAuthorize());
 
 // Helper function to get cart items
 const getCartItems = async (identifier, isGuest = false) => {
@@ -61,11 +61,15 @@ const deleteCartItem = async (identifier, productId, isGuest = false) => {
 // GET /api/cart (Get all items in the cart)
 router.get('/cart', async (req, res) => {
   try {
-    const identifier = req.user ? req.user.id : req.guestId;
+    const identifier = req.user ? req.user.id : req.query.guestId;
     const isGuest = !req.user;
 
     console.log('Identifier', identifier);
     console.log('Is Guest', isGuest);
+
+    if (!identifier) {
+      return res.status(400).json({ error: 'Missing identifier' });
+    }
 
     const cartItems = await getCartItems(identifier, isGuest);
 
@@ -79,14 +83,18 @@ router.get('/cart', async (req, res) => {
 // POST /api/cart (Add item to the cart)
 router.post('/cart', async (req, res) => {
   try {
+
     const { productId, quantity } = req.body;
 
     if (!productId || !quantity) {
       return res.status(400).json({ error: 'ProductId and quantity are required' });
     }
 
-    const identifier = req.user ? req.user.id : req.guestId;
+    const identifier = req.user ? req.user.id : req.body.guestId;
     const isGuest = !req.user;
+
+    console.log('POST /cart identifier:', identifier);
+    console.log('POST /cart isGuest:', isGuest);
 
     const cartItem = await addCartItem(identifier, productId, quantity, isGuest);
 

@@ -33,7 +33,8 @@ const SingleProduct = () => {
       try {
         const token = localStorage.getItem("token");
         if (!token) {
-          throw new Error("No token found");
+          setIsAdmin(false);
+          return;
         }
 
         const response = await fetch(`http://localhost:3000/api/users/me`, {
@@ -210,7 +211,7 @@ const SingleProduct = () => {
           <div>
             <Card>
               <CardContent>
-                <h1>{product.name}</h1>
+                {/* <h1>{product.name}</h1>
                 <h5>Description: {product.description}</h5>
                 <h5>Price: {product.price}</h5>
                 <h5>
@@ -227,7 +228,7 @@ const SingleProduct = () => {
                 <button onClick={() => navigate("/catalog")}>
                   All products
                 </button>
-                {message && <p style={{ color: "green" }}>{message}</p>}
+                {message && <p style={{ color: "green" }}>{message}</p>} */}
                 {editProduct ? (
                   <>
                     <input
