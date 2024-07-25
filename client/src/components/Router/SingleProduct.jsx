@@ -21,8 +21,6 @@ const SingleProduct = () => {
 
   const [guestId, setGuestId] = useState(null); // State for guestId
 
-
-
   const [isAdmin, setIsAdmin] = useState(false);
   const [editProduct, setEditProduct] = useState(false);
 
@@ -33,7 +31,8 @@ const SingleProduct = () => {
       try {
         const token = localStorage.getItem("token");
         if (!token) {
-          throw new Error("No token found");
+          setIsAdmin(false);
+          return;
         }
 
         const response = await fetch(`http://localhost:3000/api/users/me`, {
@@ -83,13 +82,13 @@ const SingleProduct = () => {
     getProduct();
   }, []);
 
-    // Retrieve guestId cookie on component mount
-    useEffect(() => {
-        const existingGuestId = Cookies.get('guestId');
-        if (existingGuestId) {
-          setGuestId(existingGuestId);
-        }
-      }, []);
+  // Retrieve guestId cookie on component mount
+  useEffect(() => {
+    const existingGuestId = Cookies.get("guestId");
+    if (existingGuestId) {
+      setGuestId(existingGuestId);
+    }
+  }, []);
 
   const handleEdit = () => {
     setEditProduct(true);
@@ -104,26 +103,26 @@ const SingleProduct = () => {
       if (!token && !guestId) {
         // Check if the guestId cookie exists, otherwise create a new guestId
         const tempGuestId = `guest_${Date.now()}`;
-        console.log('tempGeustId', tempGuestId);
-        
+        console.log("tempGeustId", tempGuestId);
+
         // Set the guestId cookie with a max age of 7 days
-        Cookies.set('guestId', tempGuestId);
-    
+        Cookies.set("guestId", tempGuestId);
+
         // Assign the guestId to the request object
         guestId = tempGuestId;
-      } 
- 
-    //   let guestId = Cookies.get("guestId"); // For guests
-    //   console.log('existing guestId', guestId)
+      }
 
-    //   // If guestId does not exist, create and set a new one
-    //   if (!guestId) {
-    //     guestId = "guest_" + new Date().getTime();
-    //     Cookies.set('guestId', guestId, { expires: 7 }); // Set guestId cookie with 7 days expiry
-    //     console.log('created new guestId', guestId)
-    //   }
-    //   console.log('created new guestId', guestId)
-    //   const guestId = Cookies.get("guestId"); // For guests
+      //   let guestId = Cookies.get("guestId"); // For guests
+      //   console.log('existing guestId', guestId)
+
+      //   // If guestId does not exist, create and set a new one
+      //   if (!guestId) {
+      //     guestId = "guest_" + new Date().getTime();
+      //     Cookies.set('guestId', guestId, { expires: 7 }); // Set guestId cookie with 7 days expiry
+      //     console.log('created new guestId', guestId)
+      //   }
+      //   console.log('created new guestId', guestId)
+      //   const guestId = Cookies.get("guestId"); // For guests
 
       const response = await fetch(`http://localhost:3000/api/cart`, {
         method: "POST",
@@ -136,7 +135,6 @@ const SingleProduct = () => {
           quantity: parseInt(quantity),
 
           guestId: guestId,
-
         }),
       });
 
@@ -190,7 +188,6 @@ const SingleProduct = () => {
     try {
       await fetch(`http://localhost:3000/api/products/${id}`, {
         method: "DELETE",
-       
       });
       setProduct(null);
       setMessage("Product deleted successfully");
@@ -210,7 +207,7 @@ const SingleProduct = () => {
           <div>
             <Card>
               <CardContent>
-                <h1>{product.name}</h1>
+                {/* <h1>{product.name}</h1>
                 <h5>Description: {product.description}</h5>
                 <h5>Price: {product.price}</h5>
                 <h5>
@@ -227,7 +224,7 @@ const SingleProduct = () => {
                 <button onClick={() => navigate("/catalog")}>
                   All products
                 </button>
-                {message && <p style={{ color: "green" }}>{message}</p>}
+                {message && <p style={{ color: "green" }}>{message}</p>} */}
                 {editProduct ? (
                   <>
                     <input
@@ -288,7 +285,6 @@ const SingleProduct = () => {
                     {message && <p style={{ color: "green" }}>{message}</p>}
                   </>
                 )}
-
               </CardContent>
             </Card>
           </div>
