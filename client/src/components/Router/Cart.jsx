@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
   const [total, setTotal] = useState(0);
+  const navigate = useNavigate();
+
 
   const calculateTotal = (items) => {
     const total = items.reduce((sum, item) => sum + (item.product.price * item.quantity), 0);
@@ -124,8 +127,12 @@ const Cart = () => {
       )}
       <h2>Total: ${total.toFixed(2)}</h2>
       {cartItems.length > 0 && (
+        <div>
         <button onClick={clearCart}>Clear Cart</button>
+        <button onClick={() => navigate('/checkout', { state: { cartItems, total } })}>Checkout</button>
+        </div>
       )}
+
     </div>
   );
 };
