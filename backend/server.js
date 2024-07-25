@@ -16,6 +16,8 @@ const cartRoutes = require('./routes/API/cart'); // Import cart routes
 
 const corsOptions = {
     origin: 'http://localhost:5173', // Frontend URL
+    methods: 'GET,POST,PUT,DELETE,PATCH,OPTIONS',
+    allowedHeaders: 'Content-Type,Authorization',
     credentials: true, // Allow credentials (cookies)
   };
 
@@ -23,7 +25,6 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
-
 
 app.use('/api', productRoutes);
 app.use('/api', userRoutes);
