@@ -90,16 +90,6 @@ const SingleProduct = () => {
           setGuestId(existingGuestId);
         }
       }, []);
-        }
-      } catch (error) {
-        setLoading(false);
-        setError(error.message);
-        console.log(error);
-        setMessage(null);
-      }
-    };
-    getProduct();
-  }, [id]);
 
   const handleEdit = () => {
     setEditProduct(true);
@@ -133,7 +123,7 @@ const SingleProduct = () => {
     //     console.log('created new guestId', guestId)
     //   }
     //   console.log('created new guestId', guestId)
-      const guestId = Cookies.get("guestId"); // For guests
+    //   const guestId = Cookies.get("guestId"); // For guests
 
       const response = await fetch(`http://localhost:3000/api/cart`, {
         method: "POST",
