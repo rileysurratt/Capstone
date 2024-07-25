@@ -38,6 +38,7 @@ function Login() {
             email: defaultState.email,
             password: defaultState.password,
           }),
+          credentials: "include",
         }
       );
 

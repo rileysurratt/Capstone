@@ -14,12 +14,13 @@ const Cart = () => {
   const fetchCartItems = async () => {
     try {
       const token = localStorage.getItem('token');
+      console.log('token', token);
       const guestId = Cookies.get('guestId'); // Get the guestId from cookies
       console.log('cart guestid',guestId)
 
       const response = await axios.get('http://localhost:3000/api/cart', {
         headers: token ? { Authorization: `Bearer ${token}` } : {},
-        params: guestId ? { guestId } : {}, // Send guestId as query param if available
+        params: guestId ? { guestId } : {  }, // Send guestId as query param if available
         withCredentials: true,
       });
 
