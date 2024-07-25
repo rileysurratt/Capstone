@@ -5,7 +5,8 @@
 
 import { useState } from "react";
 import { useEffect } from "react";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
+import SearchAndFilterBar from "./SearchAndFilterBar";
 
 import * as React from "react";
 import Box from "@mui/material/Box";
@@ -16,7 +17,6 @@ import Button from "@mui/material/Button";
 
 const Catalog = () => {
   const [products, setProducts] = useState([]);
-  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState([]);
 
@@ -55,6 +55,7 @@ const Catalog = () => {
 
   return (
     <>
+      <SearchAndFilterBar categories={categories} products={products} />
       {loading ? (
         <h1>Loading...</h1>
       ) : (
@@ -66,13 +67,20 @@ const Catalog = () => {
                 {products
                   .filter((product) => product.categoryId === category.id)
                   .map((product) => (
-                    <Card key={product.id} sx={{ maxWidth: 350, maxHeight: 200 }}>
+                    <Card
+                      key={product.id}
+                      sx={{ maxWidth: 350, maxHeight: 200 }}
+                    >
                       <CardContent>
                         <h2>{product.name}</h2>
                         <p>Price: {product.price}</p>
                         <p>Quantity: {product.quantity}</p>
                         {/* Add to cart button, details button */}
-                        <Button onClick={() => navigate(`/products/${product.id}`)}>Details</Button>
+                        <Button
+                          onClick={() => navigate(`/products/${product.id}`)}
+                        >
+                          Details
+                        </Button>
                         <Button>Add to cart</Button>
                       </CardContent>
                     </Card>
