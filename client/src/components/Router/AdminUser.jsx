@@ -151,15 +151,17 @@ const AdminUser = () => {
                         setUser({ ...user, address: e.target.value })
                       }
                     />
-                    <select
-                      value={user.role}
-                      onChange={(e) =>
-                        setUser({ ...user, role: e.target.value })
-                      }
-                    >
-                      <option value="ADMIN">ADMIN</option>
-                      <option value="USER">USER</option>
-                    </select>
+                    {isAdmin && (
+                      <select
+                        value={user.role}
+                        onChange={(e) =>
+                          setUser({ ...user, role: e.target.value })
+                        }
+                      >
+                        <option value="ADMIN">ADMIN</option>
+                        <option value="USER">USER</option>
+                      </select>
+                    )}
                     <Button onClick={handleSave}>Save</Button>
                     <Button onClick={() => setEditUser(false)}>Cancel</Button>
                   </>
@@ -168,7 +170,7 @@ const AdminUser = () => {
                     <h1>{user.email}</h1>
                     <h5>Name: {user.name}</h5>
                     <h5>Address: {user.address}</h5>
-                    <h5>ROLE: {user.role}</h5>
+                    <h5>Role: {user.role}</h5>
                     {isAdmin && (
                       <>
                         <Button onClick={handleEdit}>Edit</Button>

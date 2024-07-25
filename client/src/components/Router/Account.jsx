@@ -339,7 +339,7 @@ const Account = () => {
         </div>
       ) : (
         <>
-          <h1>Hello, {user.name}!</h1>
+          <h1>Hello, {users.name}!</h1>
           <h2>User Dashboard</h2>
           <Button
             type="submit"
