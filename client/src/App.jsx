@@ -14,6 +14,8 @@ import Review from "./components/Router/Review";
 import Navigation from "./components/Router/Navigation";
 import Login from "./components/Router/Login";
 import SingleProduct from "./components/Router/SingleProduct";
+import CheckoutConfirmation from "./components/Router/CheckoutConfirmation";
+
 import { Routes, Route } from "react-router-dom";
 
 function App() {
@@ -58,6 +60,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/requestproduct" element={<Request />} />
           <Route path="/review" element={<Review />} />
+          <Route path="/checkout" element={<CheckoutConfirmation />} />
         </Routes>
       </main>
 
