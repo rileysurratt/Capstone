@@ -18,9 +18,46 @@ const SingleProduct = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [quantity, setQuantity] = useState(1);
+
   const [guestId, setGuestId] = useState(null); // State for guestId
 
 
+
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [editProduct, setEditProduct] = useState(false);
+
+  //Retrieve the User to ensure they are an admin, this will
+  //allow ADMINS to see different things vs a guest or user.
+  useEffect(() => {
+    const getUserRole = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) {
+          throw new Error("No token found");
+        }
+
+        const response = await fetch(`http://localhost:3000/api/users/me`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch user data");
+        }
+
+        const userData = await response.json();
+        setIsAdmin(userData.role === "ADMIN");
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+        setIsAdmin(false);
+      }
+    };
+
+    getUserRole();
+  }, []);
+
+  //Get the product
   useEffect(() => {
     const getProduct = async () => {
       try {
@@ -53,6 +90,20 @@ const SingleProduct = () => {
           setGuestId(existingGuestId);
         }
       }, []);
+        }
+      } catch (error) {
+        setLoading(false);
+        setError(error.message);
+        console.log(error);
+        setMessage(null);
+      }
+    };
+    getProduct();
+  }, [id]);
+
+  const handleEdit = () => {
+    setEditProduct(true);
+  };
 
   // product id and quantity in the body of post request
   const addToCart = async () => {
@@ -82,6 +133,7 @@ const SingleProduct = () => {
     //     console.log('created new guestId', guestId)
     //   }
     //   console.log('created new guestId', guestId)
+      const guestId = Cookies.get("guestId"); // For guests
 
       const response = await fetch(`http://localhost:3000/api/cart`, {
         method: "POST",
@@ -92,7 +144,9 @@ const SingleProduct = () => {
         body: JSON.stringify({
           productId: product.id,
           quantity: parseInt(quantity),
+
           guestId: guestId,
+
         }),
       });
 
@@ -108,6 +162,55 @@ const SingleProduct = () => {
     }
   };
 
+  //Admin Patch
+  const handleSave = async () => {
+    try {
+      const token = localStorage.getItem("token");
+
+      const response = await fetch(`http://localhost:3000/api/products/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          name: product.name,
+          description: product.description,
+          price: parseFloat(product.price),
+          quantity: parseInt(quantity),
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to update product");
+      }
+
+      const updatedProduct = await response.json();
+      setProduct(updatedProduct);
+      setEditProduct(false);
+      setMessage("Product updated successfully");
+    } catch (error) {
+      console.error("Error updating product:", error);
+      setMessage("Failed to update product");
+    }
+  };
+
+  //ADMIN DELETE
+  const handleDelete = async () => {
+    try {
+      await fetch(`http://localhost:3000/api/products/${id}`, {
+        method: "DELETE",
+       
+      });
+      setProduct(null);
+      setMessage("Product deleted successfully");
+      navigate("/account");
+    } catch (error) {
+      console.error("Error Deleting Item", error);
+    }
+  };
+
+  //Admin View vs Guest/User View
   return (
     <>
       <div>
@@ -135,6 +238,67 @@ const SingleProduct = () => {
                   All products
                 </button>
                 {message && <p style={{ color: "green" }}>{message}</p>}
+                {editProduct ? (
+                  <>
+                    <input
+                      type="text"
+                      value={product.name}
+                      onChange={(e) =>
+                        setProduct({ ...product, name: e.target.value })
+                      }
+                    />
+                    <input
+                      type="text"
+                      value={product.description}
+                      onChange={(e) =>
+                        setProduct({ ...product, description: e.target.value })
+                      }
+                    />
+                    <input
+                      type="number"
+                      value={product.price}
+                      onChange={(e) =>
+                        setProduct({ ...product, price: e.target.value })
+                      }
+                    />
+                    <input
+                      type="number"
+                      value={quantity}
+                      onChange={(e) => setQuantity(e.target.value)}
+                    />
+                    <Button onClick={handleSave}>Save</Button>
+                    <Button onClick={() => setEditProduct(false)}>
+                      Cancel
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <h1>{product.name}</h1>
+                    <h5>Description: {product.description}</h5>
+                    <h5>Price: {product.price}</h5>
+                    <h5>
+                      Availability:{" "}
+                      {product.quantity > 0 ? "In stock" : "Out of stock"}
+                    </h5>
+                    <h5>Quantity: {quantity}</h5>
+                    {isAdmin && (
+                      <>
+                        <Button onClick={handleEdit}>Edit</Button>
+                        <Button onClick={handleDelete}>Delete</Button>
+                      </>
+                    )}
+                    {!isAdmin && (
+                      <>
+                        <Button onClick={addToCart}>Add to cart</Button>
+                        <Button onClick={() => navigate("/catalog")}>
+                          All products
+                        </Button>
+                      </>
+                    )}
+                    {message && <p style={{ color: "green" }}>{message}</p>}
+                  </>
+                )}
+
               </CardContent>
             </Card>
           </div>

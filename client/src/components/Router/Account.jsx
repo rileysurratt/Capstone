@@ -213,7 +213,7 @@ const Account = () => {
                     <strong>Role:</strong> {user.role}
                   </div>
                   <div>
-                    <Button variant="primary" onClick={() => navigate(`/users/${id}`)}>User Page</Button>
+                    <Button variant="primary" onClick={() => navigate(`/users/${user.id}`)}>User Page</Button>
                   </div>
                 </Dropdown.Item>
               ))}
@@ -339,7 +339,7 @@ const Account = () => {
         </div>
       ) : (
         <>
-          <h1>Hello, {user.name}!</h1>
+          <h1>Hello, {users.name}!</h1>
           <h2>User Dashboard</h2>
           <Button
             type="submit"

@@ -78,9 +78,10 @@ router.post("/products", authenticateAndAuthorize("ADMIN"), async (req, res) => 
 router.delete("/products/:id", authenticateAndAuthorize("ADMIN"), async (req, res) => {
     try {
         const { id } = req.params;
+        const parsedId = parseInt(id);
         const product = await prisma.product.delete({
             where: {
-                id: parseInt(id)
+                id: parsedId
             }
         })
         if (!product) {
