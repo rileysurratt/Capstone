@@ -12,7 +12,9 @@ const productRoutes = require('./routes/API/products');
 const userRoutes = require('./routes/API/users');
 const authRoutes = require('./routes/API/auth');
 const category = require('./routes/API/category')
-const cartRoutes = require('./routes/API/cart'); // Import cart routes
+const cartRoutes = require('./routes/API/cart');
+const checkoutRoutes = require('./routes/API/checkout');
+
 
 const corsOptions = {
     origin: 'http://localhost:5173', // Frontend URL
@@ -30,7 +32,8 @@ app.use('/api', productRoutes);
 app.use('/api', userRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api', category);
-app.use('/api', cartRoutes); // Mount cart routes at /api/cart
+app.use('/api', cartRoutes);
+app.use('/api', checkoutRoutes);
 
 
 app.listen(PORT, () => {
