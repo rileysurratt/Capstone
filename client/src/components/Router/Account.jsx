@@ -263,7 +263,7 @@ const Account = () => {
                     <strong>Category ID:</strong> {categories.id}
                   </div>
                   <div>
-                    <Button variant="primary" onClick={() => navigate(`/category/:id`)}>Category Page</Button>
+                    <Button variant="primary" onClick={() => navigate(`/category/${categories.id}`)}>Category Page</Button>
                   </div>
                 </Dropdown.Item>
               ))}
