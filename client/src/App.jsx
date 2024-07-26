@@ -15,6 +15,7 @@ import Navigation from "./components/Router/Navigation";
 import Login from "./components/Router/Login";
 import SingleProduct from "./components/Router/SingleProduct";
 import CheckoutConfirmation from "./components/Router/CheckoutConfirmation";
+import OrderSuccess from "./components/Router/OrderSuccess";
 
 import { Routes, Route } from "react-router-dom";
 
@@ -61,6 +62,7 @@ function App() {
           <Route path="/requestproduct" element={<Request />} />
           <Route path="/review" element={<Review />} />
           <Route path="/checkout" element={<CheckoutConfirmation />} />
+          <Route path="/order-success" element={<OrderSuccess />} />
         </Routes>
       </main>
 
