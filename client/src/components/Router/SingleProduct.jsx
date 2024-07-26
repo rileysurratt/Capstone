@@ -276,6 +276,12 @@ const SingleProduct = () => {
                     )}
                     {!isAdmin && (
                       <>
+                        <input
+                          type="number"
+                          label="quantity"
+                          value={quantity}
+                          onChange={(e) => setQuantity(e.target.value)}
+                        ></input>
                         <Button onClick={addToCart}>Add to cart</Button>
                         <Button onClick={() => navigate("/catalog")}>
                           All products
