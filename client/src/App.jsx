@@ -7,7 +7,7 @@ import Cart from "./components/Router/Cart";
 import Catalog from "./components/Router/Catalog";
 import Contactus from "./components/Router/Contactus";
 import Footer from "./components/Router/Footer";
-import History from "./components/Router/OrderHistory";
+import OrderHistory from "./components/Router/OrderHistory";
 import Register from "./components/Router/Register";
 import Request from "./components/Router/Request";
 import Review from "./components/Router/Review";
@@ -18,6 +18,7 @@ import CheckoutConfirmation from "./components/Router/CheckoutConfirmation";
 import OrderSuccess from "./components/Router/OrderSuccess";
 
 import { Routes, Route } from "react-router-dom";
+
 
 function App() {
   const navLinks = [
@@ -57,7 +58,7 @@ function App() {
           <Route path="/catalog" element={<Catalog />} />
           <Route path="/products/:id" element={<SingleProduct />} />
           <Route path="/contactus" element={<Contactus />} />
-          <Route path="/orderhistory" element={<History />} />
+          <Route path="/orderhistory" element={<OrderHistory />} />
           <Route path="/register" element={<Register />} />
           <Route path="/requestproduct" element={<Request />} />
           <Route path="/review" element={<Review />} />
