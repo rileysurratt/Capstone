@@ -2,11 +2,24 @@
 //Order History Linked Here
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Dropdown, Button } from "react-bootstrap";
+import { Dropdown, Button, Form } from "react-bootstrap";
 
 const Account = () => {
   //Retrieve Logged User
   const [user, setUser] = useState(null);
+  const [editMode, setEditMode] = useState({
+    name: false,
+    email: false,
+    address: false,
+    password: false,
+  });
+  const [editValues, setEditValues] = useState({
+    name: "",
+    email: "",
+    address: "",
+    password: "",
+  });
+  const [isFormVisible, setIsFormVisible] = useState(false);
   //Create Category
   const [categoryName, setCategoryName] = useState("");
   //Create Product
@@ -162,18 +175,69 @@ const Account = () => {
           },
         });
         if (!response.ok) {
-          throw new Error("Error");
+          throw new Error("Error fetching user data");
         }
         const userInfo = await response.json();
+        console.log("Fetched user info:", userInfo); // Debugging line
         setUser(userInfo);
+        setEditValues({
+          name: userInfo.name || "",
+          email: userInfo.email || "",
+          address: userInfo.address || "",
+          password: "",
+        });
       } catch (error) {
-        console.error("There was an error with fetching the request", error);
+        console.error("Error fetching user data:", error);
       } finally {
         setLoading(false);
       }
     };
     getUser();
-  }, [id]);
+  }, []);
+
+  const handleEditSubmit = async (field) => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        throw new Error("No token found");
+      }
+
+      const response = await fetch("http://localhost:3000/api/users/me", {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          [field]: editValues[field] || undefined, // Only include if value is set
+          password: field === "password" ? editValues.password : undefined,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to update user information");
+      }
+
+      const data = await response.json();
+      setMessage(data.message);
+      setError("");
+      setEditMode((prev) => ({ ...prev, [field]: false }));
+    } catch (error) {
+      console.error("Error updating user information:", error);
+      setError("Failed to update user information. Please try again.");
+      setMessage("");
+    }
+  };
+
+  // Handle input change
+  const handleInputChange = (e, field) => {
+    setEditValues((prev) => ({ ...prev, [field]: e.target.value }));
+  };
+
+  // Toggle edit mode
+  const toggleEditMode = (field) => {
+    setEditMode((prev) => ({ ...prev, [field]: !prev[field] }));
+  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -355,26 +419,95 @@ const Account = () => {
         <>
           <h1>Hello, {user.user.name}!</h1>
           <h2>Name: {user.user.name}</h2>
-          <h2>Email:{user.user.email}</h2>
+          <h2>Email: {user.user.email}</h2>
           <h2>Address: {user.user.address}</h2>
-          <Button
-            type="submit"
-            variant="secondary"
-            color="primary"
-            style={{ backgroundColor: "white", color: "black" }}
-          >
-            Edit Information
-          </Button>
-          <Button
-            type="submit"
-            className="userData"
-            variant="secondary"
-            color="primary"
-            style={{ backgroundColor: "white", color: "black" }}
-            onClick={() => navigate(`/orderhistory`)}
-          >
+          <Button onClick={() => navigate(`/orderhistory`)}>
             Order History
           </Button>
+          <Button onClick={() => setIsFormVisible(!isFormVisible)}>
+            {isFormVisible ? "Cancel" : "Edit Information"}
+          </Button>
+          {isFormVisible && (
+            <>
+              <h3>Edit Your Information</h3>
+              <Form>
+                <Form.Group controlId="formBasicName">
+                  <Form.Label>Name</Form.Label>
+                  {editMode.name ? (
+                    <div>
+                      <Form.Control
+                        type="text"
+                        placeholder="Enter your name"
+                        value={editValues.name}
+                        onChange={(e) => handleInputChange(e, "name")}
+                      />
+                      <Button onClick={() => handleEditSubmit("name")}>Save</Button>
+                    </div>
+                  ) : (
+                    <div onClick={() => toggleEditMode("name")}>
+                      {user.name || "Click to edit"}
+                    </div>
+                  )}
+                </Form.Group>
+                <Form.Group controlId="formBasicEmail">
+                  <Form.Label>Email</Form.Label>
+                  {editMode.email ? (
+                    <div>
+                      <Form.Control
+                        type="email"
+                        placeholder="Enter your email"
+                        value={editValues.email}
+                        onChange={(e) => handleInputChange(e, "email")}
+                      />
+                      <Button onClick={() => handleEditSubmit("email")}>Save</Button>
+                    </div>
+                  ) : (
+                    <div onClick={() => toggleEditMode("email")}>
+                      {user.email || "Click to edit"}
+                    </div>
+                  )}
+                </Form.Group>
+                <Form.Group controlId="formBasicAddress">
+                  <Form.Label>Address</Form.Label>
+                  {editMode.address ? (
+                    <div>
+                      <Form.Control
+                        type="text"
+                        placeholder="Enter your address"
+                        value={editValues.address}
+                        onChange={(e) => handleInputChange(e, "address")}
+                      />
+                      <Button onClick={() => handleEditSubmit("address")}>Save</Button>
+                    </div>
+                  ) : (
+                    <div onClick={() => toggleEditMode("address")}>
+                      {user.address || "Click to edit"}
+                    </div>
+                  )}
+                </Form.Group>
+                <Form.Group controlId="formBasicPassword">
+                  <Form.Label>Password</Form.Label>
+                  {editMode.password ? (
+                    <div>
+                      <Form.Control
+                        type="password"
+                        placeholder="Enter a new password (leave blank if you don't want to change it)"
+                        value={editValues.password}
+                        onChange={(e) => handleInputChange(e, "password")}
+                      />
+                      <Button onClick={() => handleEditSubmit("password")}>Save</Button>
+                    </div>
+                  ) : (
+                    <div onClick={() => toggleEditMode("password")}>
+                      {editValues.password ? "Change password" : "Click to change password"}
+                    </div>
+                  )}
+                </Form.Group>
+              </Form>
+              {message && <p style={{ color: "green" }}>{message}</p>}
+              {error && <p style={{ color: "red" }}>{error}</p>}
+            </>
+          )}
         </>
       )}
     </>

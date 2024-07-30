@@ -92,24 +92,29 @@ const AdminUser = () => {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to update product");
+        throw new Error("Failed to update user");
       }
 
       const updateUser = await response.json();
       setUser(updateUser);
       setEditUser(false);
-      setMessage("Product updated successfully");
+      setMessage("User updated successfully");
     } catch (error) {
-      console.error("Error updating product:", error);
-      setMessage("Failed to update product");
+      console.error("Error updating user:", error);
+      setMessage("Failed to update user");
     }
   };
 
   //DELETE
   const handleDelete = async () => {
     try {
+      const token = localStorage.getItem("token");
       await fetch(`http://localhost:3000/api/users/${id}`, {
         method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
       });
       setUser(null);
       setMessage("User deleted successfully");
