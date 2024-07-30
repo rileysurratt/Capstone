@@ -92,16 +92,16 @@ const AdminUser = () => {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to update user");
+        throw new Error("Failed to update product");
       }
 
       const updateUser = await response.json();
       setUser(updateUser);
       setEditUser(false);
-      setMessage("User updated successfully");
+      setMessage("Product updated successfully");
     } catch (error) {
-      console.error("Error updating user:", error);
-      setMessage("Failed to update user");
+      console.error("Error updating product:", error);
+      setMessage("Failed to update product");
     }
   };
 
