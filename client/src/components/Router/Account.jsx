@@ -33,10 +33,10 @@ const Account = () => {
         const response = await fetch("http://localhost:3000/api/users");
         const data = await response.json();
         setUsers(data);
-        console.log(data);
+        // console.log(data);
         setLoading(false);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
         setLoading(false);
       }
     }
@@ -50,10 +50,10 @@ const Account = () => {
         const response = await fetch("http://localhost:3000/api/products");
         const data = await response.json();
         setProducts(data);
-        console.log(data);
+        // console.log(data);
         setLoading(false);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
         setLoading(false);
       }
     }
@@ -67,10 +67,10 @@ const Account = () => {
         const response = await fetch("http://localhost:3000/api/category");
         const data = await response.json();
         setCategories(data);
-        console.log(data);
+        // console.log(data);
         setLoading(false);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
         setLoading(false);
       }
     }
@@ -213,7 +213,12 @@ const Account = () => {
                     <strong>Role:</strong> {user.role}
                   </div>
                   <div>
-                    <Button variant="primary" onClick={() => navigate(`/users/${user.id}`)}>User Page</Button>
+                    <Button
+                      variant="primary"
+                      onClick={() => navigate(`/users/${user.id}`)}
+                    >
+                      User Page
+                    </Button>
                   </div>
                 </Dropdown.Item>
               ))}
@@ -242,8 +247,12 @@ const Account = () => {
                     <strong>Category ID:</strong> {products.categoryId}
                   </div>
                   <div>
-                    <Button variant="primary"
-                    onClick={() => navigate(`/products/${products.id}}`)}>Product Page</Button>
+                    <Button
+                      variant="primary"
+                      onClick={() => navigate(`/products/${products.id}}`)}
+                    >
+                      Product Page
+                    </Button>
                   </div>
                 </Dropdown.Item>
               ))}
@@ -263,7 +272,12 @@ const Account = () => {
                     <strong>Category ID:</strong> {categories.id}
                   </div>
                   <div>
-                    <Button variant="primary" onClick={() => navigate(`/category/${categories.id}`)}>Category Page</Button>
+                    <Button
+                      variant="primary"
+                      onClick={() => navigate(`/category/${categories.id}`)}
+                    >
+                      Category Page
+                    </Button>
                   </div>
                 </Dropdown.Item>
               ))}
@@ -339,8 +353,18 @@ const Account = () => {
         </div>
       ) : (
         <>
-          <h1>Hello, {users.name}!</h1>
-          <h2>User Dashboard</h2>
+          <h1>Hello, {user.user.name}!</h1>
+          <h2>Name: {user.user.name}</h2>
+          <h2>Email:{user.user.email}</h2>
+          <h2>Address: {user.user.address}</h2>
+          <Button
+            type="submit"
+            variant="secondary"
+            color="primary"
+            style={{ backgroundColor: "white", color: "black" }}
+          >
+            Edit Information
+          </Button>
           <Button
             type="submit"
             className="userData"
