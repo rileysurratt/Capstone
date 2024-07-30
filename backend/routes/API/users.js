@@ -1,6 +1,7 @@
 const { PrismaClient } = require("capstone-database");
 const prisma = new PrismaClient();
 const express = require('express');
+const bcrypt = require("bcrypt");
 const router = express.Router();
 const { authenticateAndAuthorize } = require("../../middleware/authMiddleware");
 
@@ -17,6 +18,35 @@ router.get('/users/me', authenticateAndAuthorize("ADMIN", "USER"), async (req, r
 
         if (user) {
             res.json({ user, role: req.user.role });
+        } else {
+            res.status(404).json({ error: 'User not found' });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+// PATCH /api/users/me (Update current user's info)
+router.patch('/users/me', authenticateAndAuthorize("USER", "ADMIN"), async (req, res) => {
+    const userId = req.user.id; // Get the user ID from the authenticated user
+    const { email, name, address, password } = req.body;
+
+    try {
+        let updateData = { email, name, address };
+
+        if (password) {
+            const hashedPassword = await bcrypt.hash(password, 10);
+            updateData.password = hashedPassword;
+        }
+
+        const updatedUser = await prisma.user.update({
+            where: { id: userId },
+            data: updateData,
+        });
+
+        if (updatedUser) {
+            res.json(updatedUser);
         } else {
             res.status(404).json({ error: 'User not found' });
         }
