@@ -23,7 +23,7 @@ const AdminUser = () => {
           throw new Error("No token found");
         }
 
-        const response = await fetch(`http://localhost:3000/api/users/me`, {
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/me`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -48,7 +48,7 @@ const AdminUser = () => {
   useEffect(() => {
     const getUser = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/api/users/${id}`);
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/${id}`);
         const result = await response.json();
 
         setUser(result);
@@ -77,7 +77,7 @@ const AdminUser = () => {
     try {
       const token = localStorage.getItem("token");
 
-      const response = await fetch(`http://localhost:3000/api/users/${id}`, {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -109,7 +109,7 @@ const AdminUser = () => {
   const handleDelete = async () => {
     try {
       const token = localStorage.getItem("token");
-      await fetch(`http://localhost:3000/api/users/${id}`, {
+      await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
