@@ -13,7 +13,7 @@ function Footer({ footerLinks }) {
         className="ml-2"
         onClick={() => navigate(`/aboutus`)}
       >
-        About Us
+        About Us!
       </Button>
       <Button
         variant="secondary"
