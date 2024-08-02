@@ -35,7 +35,7 @@ const SingleProduct = () => {
           return;
         }
 
-        const response = await fetch(`http://localhost:3000/api/users/me`, {
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/me`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -61,7 +61,7 @@ const SingleProduct = () => {
     const getProduct = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3000/api/products/${id}`
+          `${import.meta.env.VITE_BACKEND_URL}/api/products/${id}`
         );
         const result = await response.json();
 
@@ -124,7 +124,7 @@ const SingleProduct = () => {
       //   console.log('created new guestId', guestId)
       //   const guestId = Cookies.get("guestId"); // For guests
 
-      const response = await fetch(`http://localhost:3000/api/cart`, {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/cart`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -155,7 +155,7 @@ const SingleProduct = () => {
     try {
       const token = localStorage.getItem("token");
 
-      const response = await fetch(`http://localhost:3000/api/products/${id}`, {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/products/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -186,7 +186,7 @@ const SingleProduct = () => {
   //ADMIN DELETE
   const handleDelete = async () => {
     try {
-      await fetch(`http://localhost:3000/api/products/${id}`, {
+      await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/products/${id}`, {
         method: "DELETE",
       });
       setProduct(null);

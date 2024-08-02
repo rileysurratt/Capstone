@@ -15,6 +15,7 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 
+
 const Catalog = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -26,7 +27,7 @@ const Catalog = () => {
     const fetchProducts = async () => {
       try {
         setLoading(true);
-        const response = await fetch("http://localhost:3000/api/products/");
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/products/`);
         const result = await response.json();
 
         setProducts(result);
@@ -40,7 +41,7 @@ const Catalog = () => {
 
     const fetchCategories = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/category/");
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/category/`);
         const result = await response.json();
 
         setCategories(result);
