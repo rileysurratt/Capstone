@@ -23,7 +23,7 @@ const AdminCategory = () => {
           throw new Error("No token found");
         }
 
-        const response = await fetch(`http://localhost:3000/api/users/me`, {
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/me`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -49,7 +49,7 @@ const AdminCategory = () => {
     const getCategory = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3000/api/category/${id}`
+          `${import.meta.env.VITE_BACKEND_URL}/api/category/${id}`
         );
         const result = await response.json();
 
@@ -80,7 +80,7 @@ const AdminCategory = () => {
     try {
       const token = localStorage.getItem("token");
 
-      const response = await fetch(`http://localhost:3000/api/category/${id}`, {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/category/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -108,7 +108,7 @@ const AdminCategory = () => {
   // Delete Category
   const handleDelete = async () => {
     try {
-      await fetch(`http://localhost:3000/api/category/${id}`, {
+      await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/category/${id}`, {
         method: "DELETE",
       });
       setCategory(null);

@@ -21,7 +21,7 @@ const Cart = () => {
       const guestId = Cookies.get('guestId'); // Get the guestId from cookies
       console.log('cart guestid',guestId)
 
-      const response = await axios.get('http://localhost:3000/api/cart', {
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/cart`, {
         headers: token ? { Authorization: `Bearer ${token}` } : {},
         params: guestId ? { guestId } : {  }, // Send guestId as query param if available
         withCredentials: true,
@@ -48,7 +48,7 @@ const Cart = () => {
       const token = localStorage.getItem('token');
       const guestId = Cookies.get('guestId'); // Get the guestId from cookies
 
-      await axios.delete('http://localhost:3000/api/cart', {
+      await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/cart`, {
         headers: token ? { Authorization: `Bearer ${token}` } : {},
         params: guestId ? { guestId } : {}, // Send guestId as query param if available
         withCredentials: true,
@@ -67,7 +67,7 @@ const Cart = () => {
       const guestId = Cookies.get('guestId'); // Get the guestId from cookies
 
       await axios.patch(
-        'http://localhost:3000/api/cart',
+        `${import.meta.env.VITE_BACKEND_URL}/api/cart`,
         { productId, quantity },
         {
           headers: token ? { Authorization: `Bearer ${token}` } : {},
@@ -87,7 +87,7 @@ const Cart = () => {
       const token = localStorage.getItem('token');
       const guestId = Cookies.get('guestId'); // Get the guestId from cookies
 
-      await axios.delete(`http://localhost:3000/api/cart/${productId}`, {
+      await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/cart/${productId}`, {
         headers: token ? { Authorization: `Bearer ${token}` } : {},
         params: guestId ? { guestId } : {}, // Send guestId as query param if available
         withCredentials: true,

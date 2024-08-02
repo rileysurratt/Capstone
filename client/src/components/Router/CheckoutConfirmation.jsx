@@ -12,7 +12,7 @@ const CheckoutConfirmation = () => {
       const token = localStorage.getItem('token');
 
       const response = await axios.post(
-        'http://localhost:3000/api/checkout',
+        `${import.meta.env.VITE_BACKEND_URL}/api/checkout`,
         { cartItems, total },
         {
           headers: { Authorization: `Bearer ${token}` },
