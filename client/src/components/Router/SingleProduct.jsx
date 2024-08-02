@@ -9,6 +9,7 @@ import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
+import CheckoutForm from "./CheckoutForm";
 
 const SingleProduct = () => {
   const [product, setProduct] = useState(null);
@@ -286,6 +287,7 @@ const SingleProduct = () => {
                         <Button onClick={() => navigate("/catalog")}>
                           All products
                         </Button>
+                        <Button onClick={() => navigate('/payment')}>Checkout</Button>
                       </>
                     )}
                     {message && <p style={{ color: "green" }}>{message}</p>}
