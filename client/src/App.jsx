@@ -16,9 +16,10 @@ import Login from "./components/Router/Login";
 import SingleProduct from "./components/Router/SingleProduct";
 import CheckoutConfirmation from "./components/Router/CheckoutConfirmation";
 import OrderSuccess from "./components/Router/OrderSuccess";
+import CheckoutForm from "./components/Router/CheckoutForm";
+import Return from "./components/Router/Return";
 
 import { Routes, Route } from "react-router-dom";
-
 
 function App() {
   const navLinks = [
@@ -64,6 +65,8 @@ function App() {
           <Route path="/review" element={<Review />} />
           <Route path="/checkout" element={<CheckoutConfirmation />} />
           <Route path="/order-success" element={<OrderSuccess />} />
+          <Route path="/payment" element={<CheckoutForm />} />
+          {/* <Route path="/return" element={<Return />} />{" "} */}
         </Routes>
       </main>
 
