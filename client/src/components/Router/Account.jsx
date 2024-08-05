@@ -43,7 +43,7 @@ const Account = () => {
   useEffect(() => {
     async function getUsers() {
       try {
-        const response = await fetch("http://localhost:3000/api/users");
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users`);
         const data = await response.json();
         setUsers(data);
         // console.log(data);
@@ -60,7 +60,7 @@ const Account = () => {
   useEffect(() => {
     async function getProducts() {
       try {
-        const response = await fetch("http://localhost:3000/api/products");
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/products`);
         const data = await response.json();
         setProducts(data);
         // console.log(data);
@@ -77,7 +77,7 @@ const Account = () => {
   useEffect(() => {
     async function getCategory() {
       try {
-        const response = await fetch("http://localhost:3000/api/category");
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/category`);
         const data = await response.json();
         setCategories(data);
         // console.log(data);
@@ -98,7 +98,7 @@ const Account = () => {
       if (!token) {
         throw new Error("No token found");
       }
-      const response = await fetch("http://localhost:3000/api/category", {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/category`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -130,7 +130,7 @@ const Account = () => {
       if (!token) {
         throw new Error("No token found");
       }
-      const response = await fetch("http://localhost:3000/api/products", {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/products`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -168,7 +168,7 @@ const Account = () => {
     const getUser = async () => {
       const token = localStorage.getItem("token");
       try {
-        const response = await fetch(`http://localhost:3000/api/users/me`, {
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/me`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -202,7 +202,7 @@ const Account = () => {
         throw new Error("No token found");
       }
 
-      const response = await fetch("http://localhost:3000/api/users/me", {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/me`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
