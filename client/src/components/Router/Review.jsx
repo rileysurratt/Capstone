@@ -1,7 +1,7 @@
 const Review = () => {
     return (
       <>
-      <h1>Review Placeholder</h1>
+      <h1>To be completed.</h1>
       </>
     );
   };
