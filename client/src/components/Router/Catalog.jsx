@@ -5,8 +5,10 @@
 
 import { useState } from "react";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import SearchAndFilterBar from "./SearchAndFilterBar";
+import axios from 'axios';
+import Cookies from 'js-cookie';
 
 import * as React from "react";
 import Box from "@mui/material/Box";
@@ -18,10 +20,63 @@ import Button from "@mui/material/Button";
 
 const Catalog = () => {
   const [products, setProducts] = useState([]);
+
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState([]);
+  const [product, setProduct] = useState(null);
+  const [message, setMessage] = useState(null);
+  const [quantity, setQuantity] = useState(1);
+  const { id } = useParams();
+
 
   const navigate = useNavigate();
+
+  const addToCart = async (productId) => {
+    console.log("Add to Cart button clicked");
+    try {
+      const token = localStorage.getItem("token"); // Assuming token is stored in localStorage
+      let guestId = Cookies.get("guestId"); // For guests
+      if (!token && !guestId) {
+        // Check if the guestId cookie exists, otherwise create a new guestId
+        const tempGuestId = `guest_${Date.now()}`;
+        console.log("tempGeustId", tempGuestId);
+
+        // Set the guestId cookie with a max age of 7 days
+        Cookies.set("guestId", tempGuestId);
+
+        // Assign the guestId to the request object
+        guestId = tempGuestId;
+      }
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/cart`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token ? `Bearer ${token}` : undefined, // Include token if present
+        },
+        body: JSON.stringify({
+          productId: productId,
+          quantity: parseInt(quantity),
+          guestId: guestId,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to add to cart");
+      }
+      const result = await response.json();
+      console.log("Add to cart result:", result);
+      setMessage("Added to cart");
+    } catch (error) {
+      console.log(error);
+      setMessage("Error adding to cart");
+    }
+  };
+
+  const handleCategoryChange = (category) => {
+    const filteredProducts = products.filter((product) => product.categoryId === category.id);
+    setFilteredProducts(filteredProducts);
+  };
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -49,10 +104,11 @@ const Catalog = () => {
         console.log(error);
       }
     };
-
     fetchProducts();
     fetchCategories();
   }, []);
+
+
 
   return (
     <>
@@ -61,35 +117,23 @@ const Catalog = () => {
         <h1>Loading...</h1>
       ) : (
         <div>
-          {categories.map((category) => (
-            <div key={category.id}>
-              <h1>{category.name}</h1>
-              <div>
-                {products
-                  .filter((product) => product.categoryId === category.id)
-                  .map((product) => (
-                    <Card
-                      key={product.id}
-                      sx={{ maxWidth: 350, maxHeight: 200 }}
-                    >
-                      <CardContent>
-                        <h2>{product.name}</h2>
-                        <p>Price: {product.price}</p>
-                        <p>Quantity: {product.quantity}</p>
-                        {/* Add to cart button, details button */}
-                        <Button
-                          onClick={() => navigate(`/products/${product.id}`)}
-                        >
-                          Details
-                        </Button>
-                        <Button>Add to cart</Button>
-                      </CardContent>
-                    </Card>
-                  ))}
-              </div>
+        {categories.map((category) => (
+          <div key={category.id}>
+            <h1 onClick={() => handleCategoryChange(category)}>{category.name}</h1>
+            <div>
+              {filteredProducts.map((product) => (
+                <Card key={product.id} sx={{ maxWidth: 350, maxHeight: 200 }}>
+                  <h2>{product.name}</h2>
+                  <p>Price: {product.price}</p>
+                  <p>Quantity: {product.quantity}</p>
+                  <Button onClick={() => navigate(`/products/${product.id}`)}>Details</Button>
+                  <Button onClick={() => addToCart(product.id)}>Add to cart</Button>
+                </Card>
+              ))}
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
+      </div>
       )}
     </>
   );
