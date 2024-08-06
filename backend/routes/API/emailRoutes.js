@@ -15,7 +15,7 @@ router.post('/send-email', async (req, res) => {
   const { subject, text } = req.body;
 
   const mailOptions = {
-    from: process.env.EMAIL_USER,
+    from,
     to: process.env.RECIPIENT_EMAIL, 
     subject,
     text,
@@ -31,4 +31,3 @@ router.post('/send-email', async (req, res) => {
 });
 
 module.exports = router;
-

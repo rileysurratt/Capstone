@@ -29,13 +29,13 @@ function Footer({ footerLinks }) {
       >
         Request a Part/Product
       </Button>
-      <Button
+      {/* <Button
         variant="secondary"
         className="ml-2"
         onClick={() => navigate(`/review`)}
       >
         Add/Read Reviews
-      </Button>
+      </Button> */}
 
     </div>
   );

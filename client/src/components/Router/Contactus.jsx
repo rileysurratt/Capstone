@@ -60,6 +60,7 @@ const Contactus = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
+          from: user.email,
           subject: `Contact Us - ${selectedTopic}`,
           text: `Message from ${user.email}: ${message}`,
         }),
@@ -77,6 +78,7 @@ const Contactus = () => {
       alert('Failed to send email. Please try again later.');
     }
   };
+  
   
   
   return (
