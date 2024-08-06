@@ -45,22 +45,42 @@ const Contactus = () => {
     setSelectedTopic(eventKey);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+  
     if (!user) {
       alert("Please log in before contacting us.");
       return;
     }
-
-    console.log(`Selected topic: ${selectedTopic}`);
-    console.log(`Message: ${message}`);
-    // Here you would add the code to actually send the email
+  
+    try {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/send-email`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          from: user.email,
+          subject: `Contact Us - ${selectedTopic}`,
+          text: `Message from ${user.email}: ${message}`,
+        }),
+      });
+  
+      if (response.ok) {
+        alert('Email sent successfully!');
+        setMessage('');
+        setSelectedTopic('');
+      } else {
+        throw new Error('Failed to send email');
+      }
+    } catch (error) {
+      console.error('Error sending email:', error);
+      alert('Failed to send email. Please try again later.');
+    }
   };
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
+  
+  
+  
   return (
     <div>
       <h1>Contact Us Below!</h1>
