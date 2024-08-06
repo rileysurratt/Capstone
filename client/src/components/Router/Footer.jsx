@@ -27,7 +27,7 @@ function Footer({ footerLinks }) {
         className="ml-2"
         onClick={() => navigate(`/requestproduct`)}
       >
-        Request a Part/Product
+        Request a Product
       </Button>
       {/* <Button
         variant="secondary"
