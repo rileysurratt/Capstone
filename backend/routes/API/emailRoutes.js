@@ -7,17 +7,18 @@ const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS, 
+    pass: process.env.EMAIL_PASS,
   },
 });
 
 router.post('/send-email', async (req, res) => {
-  res.header('Access-Control-Allow-Origin', '*')
-  const { subject, text } = req.body;
+  res.header('Access-Control-Allow-Origin', '*');
+
+  const { from, subject, text } = req.body;
 
   const mailOptions = {
     from,
-    to: process.env.RECIPIENT_EMAIL, 
+    to: process.env.RECIPIENT_EMAIL,
     subject,
     text,
   };
