@@ -83,7 +83,7 @@ const Contactus = () => {
   
   return (
     <div>
-      <h1>Contact Us Below!</h1>
+      <h1>Contact Us Below:</h1>
 
       <Dropdown onSelect={handleSelect}>
         <Dropdown.Toggle id="dropdown-basic">
@@ -97,6 +97,7 @@ const Contactus = () => {
             Recommendations
           </Dropdown.Item>
           <Dropdown.Item eventKey="Price Match">Price Match</Dropdown.Item>
+          <Dropdown.Item eventKey="Request a Part/Product">Request a Part/Product</Dropdown.Item>
           <Dropdown.Item eventKey="Other">Other</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>

@@ -2,7 +2,7 @@
 const Request = () => {
     return (
       <>
-      <h1>Product Request Placeholder</h1>
+      <h1>Contact Us Took this</h1>
       </>
     );
   };

@@ -12,6 +12,7 @@ const transporter = nodemailer.createTransport({
 });
 
 router.post('/send-email', async (req, res) => {
+  res.header('Access-Control-Allow-Origin', '*')
   const { subject, text } = req.body;
 
   const mailOptions = {
