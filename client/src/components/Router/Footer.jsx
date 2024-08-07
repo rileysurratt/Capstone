@@ -22,13 +22,13 @@ function Footer({ footerLinks }) {
       >
         Contact Us
       </Button>
-      <Button
+      {/* <Button
         variant="secondary"
         className="ml-2"
         onClick={() => navigate(`/requestproduct`)}
       >
         Request a Product
-      </Button>
+      </Button> */}
       {/* <Button
         variant="secondary"
         className="ml-2"

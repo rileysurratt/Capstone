@@ -97,6 +97,7 @@ const Contactus = () => {
             Recommendations
           </Dropdown.Item>
           <Dropdown.Item eventKey="Price Match">Price Match</Dropdown.Item>
+          <Dropdown.Item eventKey="Request a Part/Product">Request a Part/Product</Dropdown.Item>
           <Dropdown.Item eventKey="Other">Other</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
