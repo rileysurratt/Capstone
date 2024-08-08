@@ -260,9 +260,9 @@ const Account = () => {
         <div>
           <h1>Admin User</h1>
           <Dropdown>
-            <Dropdown.Toggle id="dropdown-basic">Users</Dropdown.Toggle>
-            <Dropdown.Menu>
-              {users.map((user) => (
+          <Dropdown.Toggle id="dropdown-basic">Users</Dropdown.Toggle>
+          <Dropdown.Menu className="dropdown-menu" style={{ maxHeight: '400px', overflowY: 'auto' }}>
+          {users.map((user) => (
                 <Dropdown.Item key={user.id}>
                   <div>
                     <strong>Email:</strong> {user.email}
@@ -292,7 +292,7 @@ const Account = () => {
             <Dropdown.Toggle variant="success" id="dropdown-basic">
               Products
             </Dropdown.Toggle>
-            <Dropdown.Menu>
+            <Dropdown.Menu className="dropdown-menu" style={{ maxHeight: '400px', overflowY: 'auto' }}>
               {products.map((products) => (
                 <Dropdown.Item key={products.id}>
                   <div>
@@ -326,7 +326,7 @@ const Account = () => {
             <Dropdown.Toggle variant="danger" id="dropdown-basic">
               Categories
             </Dropdown.Toggle>
-            <Dropdown.Menu>
+            <Dropdown.Menu className="dropdown-menu" style={{ maxHeight: '300px', overflowY: 'auto' }}>
               {categories.map((categories) => (
                 <Dropdown.Item key={categories.id}>
                   <div>
