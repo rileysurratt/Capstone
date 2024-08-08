@@ -1,6 +1,8 @@
 import React from "react";
 import axios from 'axios';
 import { useLocation, useNavigate } from "react-router-dom";
+import Button from "@mui/material/Button";
+import CheckoutForm from "./CheckoutForm";
 
 const CheckoutConfirmation = () => {
   const navigate = useNavigate();
@@ -47,8 +49,8 @@ const CheckoutConfirmation = () => {
         <p>Your cart is empty</p>
       )}
       <h2>Total: ${total.toFixed(2)}</h2>
-      <button onClick={handleCheckout}>Checkout!</button>
-      <button onClick={() => navigate('/cart')}>Back to Cart</button>
+      <Button onClick={() => {handleCheckout}}>Checkout</Button>
+      <Button onClick={() => navigate('/cart')}>Back to Cart</Button>
     </div>
   );
 };

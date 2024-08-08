@@ -61,7 +61,7 @@ function App() {
           <Route path="/contactus" element={<Contactus />} />
           <Route path="/orderhistory" element={<OrderHistory />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/requestproduct" element={<Request />} />
+          {/* <Route path="/requestproduct" element={<Request />} /> */}
           <Route path="/review" element={<Review />} />
           <Route path="/checkout" element={<CheckoutConfirmation />} />
           <Route path="/order-success" element={<OrderSuccess />} />

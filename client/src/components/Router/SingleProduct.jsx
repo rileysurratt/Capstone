@@ -112,19 +112,6 @@ const SingleProduct = () => {
         // Assign the guestId to the request object
         guestId = tempGuestId;
       }
-
-      //   let guestId = Cookies.get("guestId"); // For guests
-      //   console.log('existing guestId', guestId)
-
-      //   // If guestId does not exist, create and set a new one
-      //   if (!guestId) {
-      //     guestId = "guest_" + new Date().getTime();
-      //     Cookies.set('guestId', guestId, { expires: 7 }); // Set guestId cookie with 7 days expiry
-      //     console.log('created new guestId', guestId)
-      //   }
-      //   console.log('created new guestId', guestId)
-      //   const guestId = Cookies.get("guestId"); // For guests
-
       const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/cart`, {
         method: "POST",
         headers: {

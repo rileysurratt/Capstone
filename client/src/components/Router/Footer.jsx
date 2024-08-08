@@ -22,20 +22,20 @@ function Footer({ footerLinks }) {
       >
         Contact Us
       </Button>
-      <Button
+      {/* <Button
         variant="secondary"
         className="ml-2"
         onClick={() => navigate(`/requestproduct`)}
       >
-        Request a Part/Product
-      </Button>
-      <Button
+        Request a Product
+      </Button> */}
+      {/* <Button
         variant="secondary"
         className="ml-2"
         onClick={() => navigate(`/review`)}
       >
         Add/Read Reviews
-      </Button>
+      </Button> */}
 
     </div>
   );
