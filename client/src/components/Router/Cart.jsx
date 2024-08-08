@@ -129,7 +129,7 @@ const Cart = () => {
       {cartItems.length > 0 && (
         <div>
         <button onClick={clearCart}>Clear Cart</button>
-        <button onClick={() => navigate('/payment', { state: { cartItems, total } })}>Checkout</button>
+        <button onClick={() => navigate('/checkout', { state: { cartItems, total } })}>Checkout</button>
         </div>
       )}
 
