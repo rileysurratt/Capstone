@@ -49,7 +49,7 @@ const CheckoutConfirmation = () => {
         <p>Your cart is empty</p>
       )}
       <h2>Total: ${total.toFixed(2)}</h2>
-      <Button onClick={() => {handleCheckout}}>Checkout</Button>
+      <Button onClick={() => navigate('/payment')}>Checkout</Button>
       <Button onClick={() => navigate('/cart')}>Back to Cart</Button>
     </div>
   );

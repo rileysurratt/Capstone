@@ -1,6 +1,6 @@
 {
   "name": "capstone-database",
-  "version": "1.0.92",
+  "version": "1.0.93",
   "description": "Database repo for capstone",
   "main": "index.js",
   "files": [
