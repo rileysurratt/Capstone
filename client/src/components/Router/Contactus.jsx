@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Dropdown, Button, Form, Alert } from "react-bootstrap";
+import emailjs from 'emailjs-com';
 
 const Contactus = () => {
   const [selectedTopic, setSelectedTopic] = useState("");
@@ -54,19 +55,21 @@ const Contactus = () => {
     }
   
     try {
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/send-email`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          from: user.email,
-          subject: `Contact Us - ${selectedTopic}`,
-          text: `Message from ${user.email}: ${message}`,
-        }),
-      });
+      const templateParams = {
+        from_name: user.email,
+        to_name: import.meta.env.ADMIN_EMAIL,  
+        subject: `Contact Us - ${selectedTopic}`,
+        message: `Message from ${user.email}: ${message}`,
+      };
   
-      if (response.ok) {
+      const response = await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,  
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,  
+        templateParams,
+        import.meta.env.VITE_EMAILJS_USER_ID       
+      );
+  
+      if (response.status === 200) {
         alert('Email sent successfully!');
         setMessage('');
         setSelectedTopic('');
@@ -78,7 +81,6 @@ const Contactus = () => {
       alert('Failed to send email. Please try again later.');
     }
   };
-  
   
   
   return (
