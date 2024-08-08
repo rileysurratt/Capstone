@@ -16,7 +16,6 @@ const cartRoutes = require('./routes/API/cart');
 const checkoutRoutes = require('./routes/API/checkout');
 const orderRoutes = require('./routes/API/orders');
 const paymentRoutes = require('./routes/API/payment')
-const emailRoutes = require('./routes/API/emailRoutes')
 
 
 const corsOptions = {
@@ -39,7 +38,6 @@ app.use('/api', cartRoutes);
 app.use('/api', checkoutRoutes);
 app.use('/api', orderRoutes)
 app.use('/api', paymentRoutes);
-app.use('/api', emailRoutes)
 
 
 app.listen(PORT, () => {
