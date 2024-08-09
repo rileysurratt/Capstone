@@ -40,3 +40,9 @@
 .read-the-docs {
   color: #888;
 }
+
+.carousel-image {
+  width: 100%; /* Ensures the image takes up the full width of the carousel item */
+  height: 400px; /* Set a fixed height */
+  object-fit: cover; /* Ensures the image covers the area while maintaining aspect ratio */
+}
