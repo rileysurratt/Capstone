@@ -18,6 +18,8 @@ import CheckoutConfirmation from "./components/Router/CheckoutConfirmation";
 import OrderSuccess from "./components/Router/OrderSuccess";
 import CheckoutForm from "./components/Router/CheckoutForm";
 import Return from "./components/Router/Return";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Carousel } from "react-bootstrap";
 
 import { Routes, Route } from "react-router-dom";
 
@@ -36,7 +38,7 @@ function App() {
   ];
 
   return (
-    <>
+    <div className="full-page">
       <header className="container">
         <div className="row">
           <div className="col-sm-8">
@@ -71,14 +73,50 @@ function App() {
       </main>
 
       <Footer footerLinks={footerLinks} />
-    </>
+    </div>
   );
 }
 
 function HomePage({ footerLinks }) {
   return (
-    <div>
-      <h1>Insert Something Here....</h1>
+    <div className="page-container">
+      <Carousel>
+        <Carousel.Item>
+          <img
+            className="d-block w-100"
+            src="https://via.placeholder.com/800x400"
+            alt="First slide"
+          />
+          <Carousel.Caption>
+            <h3>First slide label</h3>
+            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+          </Carousel.Caption>
+        </Carousel.Item>
+        <Carousel.Item>
+          <img
+            className="d-block w-100"
+            src="https://via.placeholder.com/800x400"
+            alt="Second slide"
+          />
+          <Carousel.Caption>
+            <h3>Second slide label</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </Carousel.Caption>
+        </Carousel.Item>
+        <Carousel.Item>
+          <img
+            className="d-block w-100"
+            src="https://via.placeholder.com/800x400"
+            alt="Third slide"
+          />
+          <Carousel.Caption>
+            <h3>Third slide label</h3>
+            <p>
+              Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+            </p>
+          </Carousel.Caption>
+        </Carousel.Item>
+      </Carousel>
     </div>
   );
 }
