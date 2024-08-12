@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Dropdown, Button, Form, Alert } from "react-bootstrap";
 import emailjs from 'emailjs-com';
 
+
+
 const Contactus = () => {
   const [selectedTopic, setSelectedTopic] = useState("");
   const [message, setMessage] = useState("");
@@ -85,10 +87,10 @@ const Contactus = () => {
   
   return (
     <div>
-      <h1>Submit Your Concerns Below:</h1>
+      <h1>Contact Us Below:</h1>
 
       <Dropdown onSelect={handleSelect}>
-        <Dropdown.Toggle id="dropdown-basic">
+        <Dropdown.Toggle id="dropdown-basic" className="dropdown-color" >
           {selectedTopic || "Select a Topic"}
         </Dropdown.Toggle>
 
@@ -108,9 +110,10 @@ const Contactus = () => {
 
       <Form onSubmit={handleSubmit} style={{ marginTop: "20px" }}>
         <Form.Group controlId="formMessage">
-          <Form.Label>Type Your Message Below</Form.Label>
-          <Form.Control
+      <Form.Control
+        className="form-color"
             as="textarea"
+            placeholder="Input you message here"
             rows={3}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
@@ -119,6 +122,7 @@ const Contactus = () => {
         </Form.Group>
 
         <Button
+          className="second-button"
           variant="primary"
           type="submit"
           disabled={!user}

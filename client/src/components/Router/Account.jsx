@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Dropdown, Button, Form } from "react-bootstrap";
+import "./Account.css";
 
 const Account = () => {
   //Retrieve Logged User
@@ -43,7 +44,9 @@ const Account = () => {
   useEffect(() => {
     async function getUsers() {
       try {
-        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users`);
+        const response = await fetch(
+          `${import.meta.env.VITE_BACKEND_URL}/api/users`
+        );
         const data = await response.json();
         setUsers(data);
         // console.log(data);
@@ -60,7 +63,9 @@ const Account = () => {
   useEffect(() => {
     async function getProducts() {
       try {
-        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/products`);
+        const response = await fetch(
+          `${import.meta.env.VITE_BACKEND_URL}/api/products`
+        );
         const data = await response.json();
         setProducts(data);
         // console.log(data);
@@ -77,7 +82,9 @@ const Account = () => {
   useEffect(() => {
     async function getCategory() {
       try {
-        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/category`);
+        const response = await fetch(
+          `${import.meta.env.VITE_BACKEND_URL}/api/category`
+        );
         const data = await response.json();
         setCategories(data);
         // console.log(data);
@@ -98,14 +105,17 @@ const Account = () => {
       if (!token) {
         throw new Error("No token found");
       }
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/category`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ name: categoryName }),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/api/category`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ name: categoryName }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to add category");
@@ -130,20 +140,23 @@ const Account = () => {
       if (!token) {
         throw new Error("No token found");
       }
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/products`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          name: productName,
-          description: productDesc,
-          price: parseFloat(productPrice),
-          quantity: parseInt(productQty),
-          categoryId: parseInt(catId),
-        }),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/api/products`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            name: productName,
+            description: productDesc,
+            price: parseFloat(productPrice),
+            quantity: parseInt(productQty),
+            categoryId: parseInt(catId),
+          }),
+        }
+      );
       if (!response.ok) {
         throw new Error("Failed to create product");
       }
@@ -168,12 +181,15 @@ const Account = () => {
     const getUser = async () => {
       const token = localStorage.getItem("token");
       try {
-        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/me`, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await fetch(
+          `${import.meta.env.VITE_BACKEND_URL}/api/users/me`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         if (!response.ok) {
           throw new Error("Error fetching user data");
         }
@@ -202,17 +218,20 @@ const Account = () => {
         throw new Error("No token found");
       }
 
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/me`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          [field]: editValues[field] || undefined, // Only include if value is set
-          password: field === "password" ? editValues.password : undefined,
-        }),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/api/users/me`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            [field]: editValues[field] || undefined, // Only include if value is set
+            password: field === "password" ? editValues.password : undefined,
+          }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to update user information");
@@ -258,11 +277,16 @@ const Account = () => {
     <>
       {isAdmin ? (
         <div>
-          <h1>Admin User</h1>
+          <h1 className="create-this">Admin User</h1>
           <Dropdown>
-          <Dropdown.Toggle id="dropdown-basic">Users</Dropdown.Toggle>
-          <Dropdown.Menu className="dropdown-menu" style={{ maxHeight: '400px', overflowY: 'auto' }}>
-          {users.map((user) => (
+            <Dropdown.Toggle className="dropdown-color" id="dropdown-basic">
+              Users
+            </Dropdown.Toggle>
+            <Dropdown.Menu
+              className="dropdown-menu"
+              style={{ maxHeight: "400px", overflowY: "auto" }}
+            >
+              {users.map((user) => (
                 <Dropdown.Item key={user.id}>
                   <div>
                     <strong>Email:</strong> {user.email}
@@ -278,7 +302,7 @@ const Account = () => {
                   </div>
                   <div>
                     <Button
-                      variant="primary"
+                      className="second-button"
                       onClick={() => navigate(`/users/${user.id}`)}
                     >
                       User Page
@@ -289,10 +313,13 @@ const Account = () => {
             </Dropdown.Menu>
           </Dropdown>
           <Dropdown>
-            <Dropdown.Toggle variant="success" id="dropdown-basic">
+            <Dropdown.Toggle className="dropdown-color" id="dropdown-basic">
               Products
             </Dropdown.Toggle>
-            <Dropdown.Menu className="dropdown-menu" style={{ maxHeight: '400px', overflowY: 'auto' }}>
+            <Dropdown.Menu
+              className="dropdown-menu"
+              style={{ maxHeight: "400px", overflowY: "auto" }}
+            >
               {products.map((products) => (
                 <Dropdown.Item key={products.id}>
                   <div>
@@ -312,7 +339,7 @@ const Account = () => {
                   </div>
                   <div>
                     <Button
-                      variant="primary"
+                      className="second-button"
                       onClick={() => navigate(`/products/${products.id}}`)}
                     >
                       Product Page
@@ -323,10 +350,13 @@ const Account = () => {
             </Dropdown.Menu>
           </Dropdown>
           <Dropdown>
-            <Dropdown.Toggle variant="danger" id="dropdown-basic">
+            <Dropdown.Toggle className="dropdown-color" id="dropdown-basic">
               Categories
             </Dropdown.Toggle>
-            <Dropdown.Menu className="dropdown-menu" style={{ maxHeight: '300px', overflowY: 'auto' }}>
+            <Dropdown.Menu
+              className="dropdown-menu"
+              style={{ maxHeight: "300px", overflowY: "auto" }}
+            >
               {categories.map((categories) => (
                 <Dropdown.Item key={categories.id}>
                   <div>
@@ -337,7 +367,7 @@ const Account = () => {
                   </div>
                   <div>
                     <Button
-                      variant="primary"
+                      className="second-button"
                       onClick={() => navigate(`/category/${categories.id}`)}
                     >
                       Category Page
@@ -348,71 +378,79 @@ const Account = () => {
             </Dropdown.Menu>
           </Dropdown>
           <h3>
-            <b>Create a Category</b>
+            <b className="create-this">Create a Category</b>
           </h3>
           <form onSubmit={handleSubmit}>
             <div>
-              <label>Name:</label>
               <input
                 type="text"
+                className="form-color"
                 placeholder="Name of Category"
                 value={categoryName}
                 onChange={(e) => setCategoryName(e.target.value)}
                 required
               />
             </div>
-            <button type="submit">Create Category</button>
+            <button className="button-color" type="submit">
+              Create Category
+            </button>
           </form>
           {message && <p style={{ color: "green" }}>{message}</p>}
           {error && <p style={{ color: "red" }}>{error}</p>}
           <br />
           <h3>
-            <b>Add a Product</b>
+            <b className="create-this">Add a Product</b>
           </h3>
           <form onSubmit={createProduct}>
             <div>
-              <label>Name:</label>
               <input
+                className="form-color"
                 type="text"
                 placeholder="Name of Product"
                 value={productName}
                 onChange={(e) => setproductName(e.target.value)}
                 required
               />
-              <label>Description:</label>
+              <br></br>
               <input
+                className="form-color"
                 type="text"
                 placeholder="Description of Product"
                 value={productDesc}
                 onChange={(e) => setproductDesc(e.target.value)}
                 required
               />
-              <label>Price:</label>
+              <br></br>
               <input
+                className="form-color"
                 type="text"
                 placeholder="Price of Product"
                 value={productPrice}
                 onChange={(e) => setproductPrice(e.target.value)}
                 required
               />
-              <label>Quantity:</label>
+              <br></br>
               <input
+                className="form-color"
                 type="text"
                 placeholder="Price of Product"
                 value={productQty}
                 onChange={(e) => setproductQty(e.target.value)}
                 required
               />
-              <label>Category ID:</label>
+              <br></br>
               <input
+                className="form-color"
                 type="text"
-                placeholder="Category of Product"
+                placeholder="Category ID of Product"
                 value={catId}
                 onChange={(e) => setCatId(e.target.value)}
                 required
               />
             </div>
-            <button type="submit">Add the Product</button>
+            <button className="button-color" type="submit">
+              Add the Product
+            </button>
           </form>
         </div>
       ) : (
@@ -421,18 +459,22 @@ const Account = () => {
           <h2>Name: {user.user.name}</h2>
           <h2>Email: {user.user.email}</h2>
           <h2>Address: {user.user.address}</h2>
-          <Button onClick={() => navigate(`/orderhistory`)}>
+          <Button
+            className="second-button"
+            onClick={() => navigate(`/orderhistory`)}
+          >
             Order History
           </Button>
-          <Button onClick={() => setIsFormVisible(!isFormVisible)}>
+          <Button
+            className="second-button"
+            onClick={() => setIsFormVisible(!isFormVisible)}
+          >
             {isFormVisible ? "Cancel" : "Edit Information"}
           </Button>
           {isFormVisible && (
             <>
-              <h3>Edit Your Information</h3>
               <Form>
                 <Form.Group controlId="formBasicName">
-                  <Form.Label>Name</Form.Label>
                   {editMode.name ? (
                     <div>
                       <Form.Control
@@ -441,16 +483,23 @@ const Account = () => {
                         value={editValues.name}
                         onChange={(e) => handleInputChange(e, "name")}
                       />
-                      <Button onClick={() => handleEditSubmit("name")}>Save</Button>
+                      <Button
+                        className="second-button"
+                        onClick={() => handleEditSubmit("name")}
+                      >
+                        Save
+                      </Button>
                     </div>
                   ) : (
-                    <div onClick={() => toggleEditMode("name")}>
-                      {user.name || "Click to edit"}
-                    </div>
+                    <Button
+                      className="second-button"
+                      onClick={() => toggleEditMode("name")}
+                    >
+                      {user.name || "Edit Name"}
+                    </Button>
                   )}
                 </Form.Group>
                 <Form.Group controlId="formBasicEmail">
-                  <Form.Label>Email</Form.Label>
                   {editMode.email ? (
                     <div>
                       <Form.Control
@@ -459,16 +508,23 @@ const Account = () => {
                         value={editValues.email}
                         onChange={(e) => handleInputChange(e, "email")}
                       />
-                      <Button onClick={() => handleEditSubmit("email")}>Save</Button>
+                      <Button
+                        className="second-button"
+                        onClick={() => handleEditSubmit("email")}
+                      >
+                        Save
+                      </Button>
                     </div>
                   ) : (
-                    <div onClick={() => toggleEditMode("email")}>
-                      {user.email || "Click to edit"}
-                    </div>
+                    <Button
+                      className="second-button"
+                      onClick={() => toggleEditMode("email")}
+                    >
+                      {user.email || "Edit Email"}
+                    </Button>
                   )}
                 </Form.Group>
                 <Form.Group controlId="formBasicAddress">
-                  <Form.Label>Address</Form.Label>
                   {editMode.address ? (
                     <div>
                       <Form.Control
@@ -477,16 +533,23 @@ const Account = () => {
                         value={editValues.address}
                         onChange={(e) => handleInputChange(e, "address")}
                       />
-                      <Button onClick={() => handleEditSubmit("address")}>Save</Button>
+                      <Button
+                        className="second-button"
+                        onClick={() => handleEditSubmit("address")}
+                      >
+                        Save
+                      </Button>
                     </div>
                   ) : (
-                    <div onClick={() => toggleEditMode("address")}>
-                      {user.address || "Click to edit"}
-                    </div>
+                    <Button
+                      className="second-button"
+                      onClick={() => toggleEditMode("address")}
+                    >
+                      {user.address || "Edit Address"}
+                    </Button>
                   )}
                 </Form.Group>
                 <Form.Group controlId="formBasicPassword">
-                  <Form.Label>Password</Form.Label>
                   {editMode.password ? (
                     <div>
                       <Form.Control
@@ -495,12 +558,22 @@ const Account = () => {
                         value={editValues.password}
                         onChange={(e) => handleInputChange(e, "password")}
                       />
-                      <Button onClick={() => handleEditSubmit("password")}>Save</Button>
+                      <Button
+                        className="second-button"
+                        onClick={() => handleEditSubmit("password")}
+                      >
+                        Save
+                      </Button>
                     </div>
                   ) : (
-                    <div onClick={() => toggleEditMode("password")}>
-                      {editValues.password ? "Change password" : "Click to change password"}
-                    </div>
+                    <Button
+                      className="second-button"
+                      onClick={() => toggleEditMode("password")}
+                    >
+                      {editValues.password
+                        ? "Change password"
+                        : "Click to change password"}
+                    </Button>
                   )}
                 </Form.Group>
               </Form>
