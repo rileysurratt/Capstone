@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Chakra Petch';
   line-height: 1.5;
   font-weight: 400;
 
@@ -19,7 +19,7 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #363b74;
   text-decoration: inherit;
 }
 a:hover {
@@ -30,7 +30,9 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
+  font-family: 'Chakra Petch';
   background-color: #c79dd7;
+  color: #363b74;
   min-width: 320px;
   min-height: 100vh;
 }

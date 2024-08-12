@@ -1,11 +1,15 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import SearchAndFilterBar from "./SearchAndFilterBar";
-import axios from 'axios';
-import Cookies from 'js-cookie';
+import axios from "axios";
+import Cookies from "js-cookie";
 import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
+
 import Button from "@mui/material/Button";
+
+import Card from "react-bootstrap/Card";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
 
 const Catalog = () => {
   const [products, setProducts] = useState([]);
@@ -34,18 +38,21 @@ const Catalog = () => {
         // Assign the guestId to the request object
         guestId = tempGuestId;
       }
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/cart`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: token ? `Bearer ${token}` : undefined, // Include token if present
-        },
-        body: JSON.stringify({
-          productId: productId,
-          quantity: parseInt(quantity),
-          guestId: guestId,
-        }),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/api/cart`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: token ? `Bearer ${token}` : undefined, // Include token if present
+          },
+          body: JSON.stringify({
+            productId: productId,
+            quantity: parseInt(quantity),
+            guestId: guestId,
+          }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to add to cart");
@@ -63,7 +70,9 @@ const Catalog = () => {
     const fetchProducts = async () => {
       try {
         setLoading(true);
-        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/products/`);
+        const response = await fetch(
+          `${import.meta.env.VITE_BACKEND_URL}/api/products/`
+        );
         const result = await response.json();
         setProducts(result);
         setFilteredProducts(result);
@@ -75,7 +84,9 @@ const Catalog = () => {
 
     const fetchCategories = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/category/`);
+        const response = await fetch(
+          `${import.meta.env.VITE_BACKEND_URL}/api/category/`
+        );
         const result = await response.json();
         setCategories(result);
       } catch (error) {
@@ -93,7 +104,13 @@ const Catalog = () => {
 
   return (
     <>
-      <SearchAndFilterBar categories={categories} products={products} onFilter={handleFilter} />
+      <div>
+        <SearchAndFilterBar
+          categories={categories}
+          products={products}
+          onFilter={handleFilter}
+        />
+      </div>
       {loading ? (
         <h1>Loading...</h1>
       ) : (
@@ -101,17 +118,26 @@ const Catalog = () => {
           {categories.map((category) => (
             <div key={category.id}>
               <h1>{category.name}</h1>
-              <div>
-                {filteredProducts.filter(product => product.categoryId === category.id).map((product) => (
-                  <Card key={product.id} sx={{ maxWidth: 350, maxHeight: 200 }}>
-                    <h2>{product.name}</h2>
-                    <p>Price: {product.price}</p>
-                    <p>Quantity: {product.quantity}</p>
-                    <Button onClick={() => navigate(`/products/${product.id}`)}>Details</Button>
-                    <Button onClick={() => addToCart(product.id)}>Add to cart</Button>
-                  </Card>
-                ))}
-              </div>
+              <Row xs={1} md={2} className="g-4 cardGroup-container">
+                {filteredProducts
+                  .filter((product) => product.categoryId === category.id)
+                  .map((product) => (
+                    <Card
+                      key={product.id}
+                      sx={{ maxWidth: 350, maxHeight: 200 }}
+                    >
+                      <Card.Img variant="top" />
+                      <Card.Body>
+                        <Card.Title>{product.name}</Card.Title>
+                        <Card.Text>{product.description}</Card.Text>
+                        <Card.Text>Price: {product.price}</Card.Text>
+                        <Card.Text>Quantity: {product.quantity}</Card.Text>
+                        <Button onClick={() => navigate(`/products/${product.id}`)}>Details</Button>
+                        <Button onClick={() => addToCart(product.id)}>Add to cart</Button>
+                      </Card.Body>
+                    </Card>
+                  ))}
+              </Row>
             </div>
           ))}
         </div>
@@ -121,4 +147,3 @@ const Catalog = () => {
 };
 
 export default Catalog;
-
