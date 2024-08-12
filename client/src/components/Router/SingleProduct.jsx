@@ -67,7 +67,6 @@ const SingleProduct = () => {
         const result = await response.json();
 
         setProduct(result);
-        // console.log(result);
         setLoading(false);
 
         if (!response.ok) {
