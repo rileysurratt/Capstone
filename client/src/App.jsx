@@ -1,5 +1,5 @@
 import "./App.css";
-import emailjs from 'emailjs-com';
+import emailjs from '@emailjs/browser';
 import Aboutus from "./components/Router/Aboutus";
 import Account from "./components/Router/Account";
 import AdminCategory from "./components/Router/AdminCategory";
