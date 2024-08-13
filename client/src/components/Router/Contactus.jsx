@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Dropdown, Button, Form, Alert } from "react-bootstrap";
-import emailjs from 'emailjs-com';
+import emailjs from '@emailjs/browser';
 
 
 
