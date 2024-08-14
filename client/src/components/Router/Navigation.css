@@ -1,0 +1,52 @@
+.navigation {
+    display: flex;
+    justify-content: space-between; /* Align title and buttons */
+    align-items: center; /* Center vertically */
+    padding: 1rem; /* Add some padding */
+    background-color: #c79dd7; /* Light background */
+    border-bottom: 1px solid #ddd; /* Subtle border */
+  }
+  
+  .navigation-title {
+    font-size: 1.8rem; /* Larger title font */
+    font-weight: bold; /* Bold title */
+    color: #4d1b7b; /* Darker title color */
+  }
+  
+  .navigation-buttons {
+    display: flex; /* Arrange buttons horizontally */
+  }
+  
+  .navigation-buttons button {
+    margin-left: 0.5rem; /* Space between buttons */
+    border-radius: 5px; /* Rounded corners */
+    padding: 0.6rem 1rem; /* More padding for buttons */
+    font-size: 1rem; /* Slightly larger button text */
+    background-color: #4d1b7b;
+  }
+
+  .navigation-buttons button:hover {
+    background-color: #ef4f91;
+  }
+
+  /* Responsive Styles */
+@media (max-width: 768px) { /* For tablets and smaller */
+    .navigation {
+      flex-direction: column; /* Stack title and buttons vertically */
+      padding: 1rem;
+    }
+  
+    .navigation-title {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+  
+    .navigation-buttons {
+      flex-direction: column; /* Stack buttons vertically */
+    }
+  
+    .navigation-buttons button {
+      margin-bottom: 0.5rem; /* Space between buttons */
+    }
+  }
+  

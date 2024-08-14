@@ -1,0 +1,34 @@
+.footer-images{
+    display: flex;
+    /* height: 10vh; */
+    justify-content: center;
+    padding: 10px;
+    margin: auto;
+    margin-bottom: 10px;
+}
+
+.footer-buttons button {
+    background-color: #4d1b7b;
+}
+
+.footer-buttons button:hover {
+    background-color: #ef4f91;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) { /* For tablets and smaller */
+    .footer-images {
+      flex-wrap: wrap;
+      align-items: center; /* Center images horizontally */
+    }
+  
+    .footer-images img {
+      margin-bottom: 10px; /* Add space between images */
+    }
+  }
+
+  /* Make images smaller */
+.footer-images img {
+    max-width: 100px; /* Adjust this value to control the maximum width */
+    height: auto; /* Maintain aspect ratio */
+  }
