@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./Login.css";
+
 
 function Login() {
   const [loggedOn, setLoggedOn] = useState(false);
@@ -79,6 +81,7 @@ function Login() {
     <div className="loginform">
       {!loggedOn ? (
         <form onSubmit={handleSubmit} className="form-group custom-form">
+          <div className="email-password-container">
           <label htmlFor="email">Email</label>
           <input
           placeholder="email"
@@ -100,14 +103,8 @@ function Login() {
             value={defaultState.password}
             onChange={handleChange}
           />
+          </div>
           <br />
-          <Button
-            variant="secondary"
-            className="ml-2"
-            onClick={() => navigate(`/cart`)}
-          >
-            My Cart
-          </Button>
           <Button
             type="submit"
             variant="secondary"
@@ -119,14 +116,25 @@ function Login() {
           <Button
             variant="secondary"
             className="ml-2"
+            onClick={() => navigate(`/cart`)}
+          >
+            My Cart
+          </Button>
+          <Button
+            variant="secondary"
+            className="ml-2"
             onClick={() => navigate(`/register`)}
           >
             Register New Account
           </Button>
         </form>
       ) : (
-        <div style={{ marginTop: "20px" }}>
-          <h3>Welcome In!</h3>
+        <>
+        <div className="logged-in-message">
+        <h3>Welcome In!</h3>
+        </div>
+        <div style={{ marginTop: "20px" }} className="logged-in-container">
+
           <Button variant="secondary" onClick={() => navigate("/cart")}>
             My Cart
           </Button>
@@ -137,6 +145,7 @@ function Login() {
             Logout
           </Button>
         </div>
+        </>
       )}
       {error && <h2>{error.message}</h2>}
     </div>
