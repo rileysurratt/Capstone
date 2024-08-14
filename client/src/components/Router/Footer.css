@@ -1,7 +1,7 @@
 .footer-images{
     display: flex;
     /* height: 10vh; */
-    justify-content: center;
+    justify-content: space-evenly;
     padding: 10px;
     margin: auto;
     margin-bottom: 10px;
@@ -19,7 +19,8 @@
 @media (max-width: 768px) { /* For tablets and smaller */
     .footer-images {
       flex-wrap: wrap;
-      align-items: center; /* Center images horizontally */
+      flex-direction: column;
+      align-items: center;
     }
   
     .footer-images img {
@@ -32,3 +33,15 @@
     max-width: 100px; /* Adjust this value to control the maximum width */
     height: auto; /* Maintain aspect ratio */
   }
+
+  .footer-image {
+    max-width: 100px;
+    height: auto;
+  }
+
+  /* Add this style for scrolling to the bottom of the footer on small screens */
+@media (max-width: 768px) {
+  .footer-images {
+    margin-bottom: 50px; /* Add a bottom margin to create space for scrolling */
+  }
+}
