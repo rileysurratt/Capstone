@@ -105,6 +105,7 @@ function Login() {
           />
           </div>
           <br />
+          <div className="login-buttons">
           <Button
             type="submit"
             variant="secondary"
@@ -127,10 +128,11 @@ function Login() {
           >
             Register New Account
           </Button>
+          </div>
         </form>
       ) : (
         <>
-        <div className="logged-in-message">
+        <div className="email-password-container">
         <h3>Welcome In!</h3>
         </div>
         <div style={{ marginTop: "20px" }} className="logged-in-container">
