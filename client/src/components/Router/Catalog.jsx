@@ -12,6 +12,7 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import Spinner from "react-bootstrap/Spinner";
 
 const Catalog = () => {
   const [products, setProducts] = useState([]);
@@ -107,7 +108,7 @@ const Catalog = () => {
 
   return (
     <>
-      <div>
+      <div className="search-bar">
         <SearchAndFilterBar
           categories={categories}
           products={products}
@@ -115,13 +116,14 @@ const Catalog = () => {
         />
       </div>
       {loading ? (
-        <h1>Loading...</h1>
+        <Spinner animation="border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
       ) : (
         <div>
           {categories.map((category) => (
             <div key={category.id}>
-              <h1>{category.name}</h1>
-
+              <h1 className="category-header">{category.name}</h1>
               <Row xs={1} md={2} className="g-4 cardGroup-container">
                 {filteredProducts
                   .filter((product) => product.categoryId === category.id)
@@ -132,16 +134,17 @@ const Catalog = () => {
                           <Card.Title className="card-title">
                             {product.name}
                           </Card.Title>
-                          <Card.Text className="card-script">
+                          <Card.Text className="card-details">
                             {product.description}
                           </Card.Text>
-                          <Card.Text className="card-price">
+                          <Card.Text className="card-details">
                             Price: {product.price}
                           </Card.Text>
-                          <Card.Text className="card-title">
+                          <Card.Text className="card-details">
                             Quantity: {product.quantity}
                           </Card.Text>
                           <Button
+                            sx={{ backgroundColor: "#4d1b7b", color: "white" }}
                             className="button-color"
                             startIcon={<InfoOutlinedIcon />}
                             onClick={() => navigate(`/products/${product.id}`)}
@@ -149,6 +152,7 @@ const Catalog = () => {
                             Details
                           </Button>
                           <Button
+                            sx={{ backgroundColor: "#4d1b7b", color: "white" }}
                             className="button-color"
                             startIcon={<AddShoppingCartIcon />}
                             onClick={() => addToCart(product.id)}

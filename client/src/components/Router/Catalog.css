@@ -1,17 +1,17 @@
 /* Add padding between each category */
 .category-section {
     padding-bottom: 2rem;
-    /* Adjust padding as needed */
     margin-bottom: 2rem;
-    /* Additional margin for spacing */
     border-bottom: 1px solid #ddd;
-    /* Optional: Add a separator between categories */
+    
 }
 
 .card-container {
     width: 18rem;
     height: 22rem;
     margin: auto;
+    border: 3px solid black;
+
 }
 
 .card-body {
@@ -23,6 +23,7 @@
 .card-title {
     font-size: 1rem;
     margin-bottom: 0.5rem;
+    font-weight: 700;
 }
 
 .card-script {
@@ -41,5 +42,5 @@
 }
 
 .cardGroup-container {
-    margin-bottom: 2rem;
+    margin-bottom: 4rem;
 }

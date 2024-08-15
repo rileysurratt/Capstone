@@ -4,15 +4,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import Cookies from "js-cookie";
 
 import * as React from "react";
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
+import Card from "react-bootstrap/Card";
 import Button from "@mui/material/Button";
-import CheckoutForm from "./CheckoutForm";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
-import EditIcon from '@mui/icons-material/Edit';
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import EditIcon from "@mui/icons-material/Edit";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
 const SingleProduct = () => {
   const [product, setProduct] = useState(null);
@@ -39,11 +35,14 @@ const SingleProduct = () => {
           return;
         }
 
-        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/me`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await fetch(
+          `${import.meta.env.VITE_BACKEND_URL}/api/users/me`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
         if (!response.ok) {
           throw new Error("Failed to fetch user data");
@@ -114,19 +113,22 @@ const SingleProduct = () => {
         // Assign the guestId to the request object
         guestId = tempGuestId;
       }
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/cart`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: token ? `Bearer ${token}` : undefined, // Include token if present
-        },
-        body: JSON.stringify({
-          productId: product.id,
-          quantity: parseInt(quantity),
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/api/cart`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: token ? `Bearer ${token}` : undefined, // Include token if present
+          },
+          body: JSON.stringify({
+            productId: product.id,
+            quantity: parseInt(quantity),
 
-          guestId: guestId,
-        }),
-      });
+            guestId: guestId,
+          }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to add to cart");
@@ -145,19 +147,22 @@ const SingleProduct = () => {
     try {
       const token = localStorage.getItem("token");
 
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/products/${id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          name: product.name,
-          description: product.description,
-          price: parseFloat(product.price),
-          quantity: parseInt(quantity),
-        }),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/api/products/${id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            name: product.name,
+            description: product.description,
+            price: parseFloat(product.price),
+            quantity: parseInt(quantity),
+          }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to update product");
@@ -194,79 +199,122 @@ const SingleProduct = () => {
         {error ? (
           <h1>{error}</h1>
         ) : product ? (
-          <div>
-            <Card className="cardacct">
-              <CardContent>
-                {editProduct ? (
-                  <>
-                    <input
-                      type="text"
-                      value={product.name}
-                      onChange={(e) =>
-                        setProduct({ ...product, name: e.target.value })
-                      }
-                    />
-                    <input
-                      type="text"
-                      value={product.description}
-                      onChange={(e) =>
-                        setProduct({ ...product, description: e.target.value })
-                      }
-                    />
-                    <input
-                      type="number"
-                      value={product.price}
-                      onChange={(e) =>
-                        setProduct({ ...product, price: e.target.value })
-                      }
-                    />
-                    <input
-                      type="number"
-                      value={quantity}
-                      onChange={(e) => setQuantity(e.target.value)}
-                    />
-                    <Button className="admin-button" onClick={handleSave}>Save</Button>
-                    <Button className="admin-button" onClick={() => setEditProduct(false)}>
-                      Cancel
-                    </Button>
-                  </>
-                ) : (
-                  <>
-                    <h1>{product.name}</h1>
-                    <h5>Description: {product.description}</h5>
-                    <h5>Price: {product.price}</h5>
-                    <h5>
-                      Availability:{" "}
-                      {product.quantity > 0 ? "In stock" : "Out of stock"}
-                    </h5>
-                    <h5>Quantity: {quantity}</h5>
-                    {isAdmin && (
-                      <>
-                        <Button startIcon={<EditIcon />} onClick={handleEdit}>Edit</Button>
-                        <Button startIcon={<DeleteOutlineOutlinedIcon />} onClick={handleDelete}>Delete</Button>
-                      </>
-                    )}
-                    {!isAdmin && (
-                      <>
-                        <input
-                          type="number"
-                          label="quantity"
-                          value={quantity}
-                          onChange={(e) => setQuantity(e.target.value)}
-                        ></input>
-                        <Button startIcon={<AddShoppingCartIcon />} onClick={addToCart}>Add to cart</Button>
-                        <Button onClick={() => navigate("/catalog")}>
-                          All products
-                        </Button>
-                        <Button onClick={() => navigate('/checkout')}>Checkout</Button>
-                      </>
-                    )}
-                    {message && <p style={{ color: "green" }}>{message}</p>}
-                  </>
-                )}
-              </CardContent>
-            </Card>
-          </div>
+          <Card className="card-container mt-4 mb-4">
+            <Card.Body className="card-body">
+              {editProduct ? (
+                <>
+                  <input
+                    className="card-title"
+                    type="text"
+                    value={product.name}
+                    onChange={(e) =>
+                      setProduct({ ...product, name: e.target.value })
+                    }
+                  />
+                  <input
+                    className="card-details"
+                    type="text"
+                    value={product.description}
+                    onChange={(e) =>
+                      setProduct({ ...product, description: e.target.value })
+                    }
+                  />
+                  <input
+                    className="card-details"
+                    type="number"
+                    value={product.price}
+                    onChange={(e) =>
+                      setProduct({ ...product, price: e.target.value })
+                    }
+                  />
+                  <input
+                    className="card-details"
+                    type="number"
+                    value={quantity}
+                    onChange={(e) => setQuantity(e.target.value)}
+                  />
+                  <Button
+                    sx={{ backgroundColor: "#4d1b7b", color: "white" }}
+                    className="button-color"
+                    onClick={handleSave}
+                  >
+                    Save
+                  </Button>
+                  <Button
+                    sx={{ backgroundColor: "#4d1b7b", color: "white" }}
+                    className="button-color"
+                    onClick={() => setEditProduct(false)}
+                  >
+                    Cancel
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <h1>{product.name}</h1>
+                  <h5>Description: {product.description}</h5>
+                  <h5>Price: {product.price}</h5>
+                  <h5>
+                    Availability:{" "}
+                    {product.quantity > 0 ? "In stock" : "Out of stock"}
+                  </h5>
+                  <h5>Quantity: {quantity}</h5>
+                  {isAdmin && (
+                    <>
+                      <Button
+                        sx={{ backgroundColor: "#4d1b7b", color: "white" }}
+                        className="button-color"
+                        startIcon={<EditIcon />}
+                        onClick={handleEdit}
+                      >
+                        Edit
+                      </Button>
+                      <Button
+                        sx={{ backgroundColor: "#4d1b7b", color: "white" }}
+                        className="button-color"
+                        startIcon={<DeleteOutlineOutlinedIcon />}
+                        onClick={handleDelete}
+                      >
+                        Delete
+                      </Button>
+                    </>
+                  )}
+                  {!isAdmin && (
+                    <>
+                      <input
+                        type="number"
+                        label="quantity"
+                        value={quantity}
+                        onChange={(e) => setQuantity(e.target.value)}
+                      ></input>
+                      <Button
+                        sx={{ backgroundColor: "#4d1b7b", color: "white" }}
+                        className="button-color"
+                        startIcon={<AddShoppingCartIcon />}
+                        onClick={addToCart}
+                      >
+                        Add to cart
+                      </Button>
+                      <Button
+                        sx={{ backgroundColor: "#4d1b7b", color: "white" }}
+                        className="button-color"
+                        onClick={() => navigate("/catalog")}
+                      >
+                        All products
+                      </Button>
+                      <Button
+                        sx={{ backgroundColor: "#4d1b7b", color: "white" }}
+                        className="button-color"
+                        onClick={() => navigate("/cart")}
+                      >
+                        Checkout
+                      </Button>
+                    </>
+                  )}
+                  {message && <p style={{ color: "green" }}>{message}</p>}
+                </>
+              )}
+            </Card.Body>
+          </Card>
         ) : (
           <h1>Loading ...</h1>
         )}
