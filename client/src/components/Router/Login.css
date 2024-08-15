@@ -1,8 +1,8 @@
 .loginform {
     /* Overall container styling */
     width: 100%; /* Set a fixed width for the container */
-    margin: 0 auto; /* Center the container horizontally */
-    padding: 20px;
+    margin: auto; /* Center the container horizontally */
+    padding: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
     display: flex;
@@ -15,7 +15,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
+    margin: auto;
+  } 
   
   .email-password-container {
     /* Input field container styling */
@@ -69,6 +70,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
     /* height: 50px;
     width: 100px; */
+  }
+
+  .text-label {
+    margin: auto;
+    padding: 3px;
+  }
+
+  .text-input {
+    height: 30px;
+    margin-right: 5px;
+    margin-left: 5px;
   }

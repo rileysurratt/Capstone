@@ -82,24 +82,24 @@ function Login() {
       {!loggedOn ? (
         <form onSubmit={handleSubmit} className="form-group custom-form">
           <div className="email-password-container">
-          <label htmlFor="email">Email</label>
-          <input
+          <label className="text-label" htmlFor="email">Email:</label>
+          <input 
           placeholder="email"
             name="email"
             type="email"
             required
-            className="form-control"
+            className="form-control text-input"
             value={defaultState.email}
             onChange={handleChange}
           />
           <br />
-          <label htmlFor="password">Password</label>
+          <label className="text-label" htmlFor="password">Password</label>
           <input
           placeholder="password"
             name="password"
             type="password"
             required
-            className="form-control"
+            className="form-control text-input"
             value={defaultState.password}
             onChange={handleChange}
           />
