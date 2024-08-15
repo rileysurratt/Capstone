@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useLocation, useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import CheckoutForm from "./CheckoutForm";
+import './CheckoutConfirmation.css';
 
 const CheckoutConfirmation = () => {
   const navigate = useNavigate();
@@ -35,22 +36,39 @@ const CheckoutConfirmation = () => {
 
 
   return (
-    <div>
+    <div className="checkout-container">
       <h1>Please review your cart and confirm your checkout below</h1>
       {cartItems.length > 0 ? (
-        <ul>
-          {cartItems.map((item) => (
-            <li key={item.id}>
-              {item.product.name} - {item.quantity} x ${item.product.price.toFixed(2)}
-            </li>
-          ))}
-        </ul>
+        <table className="checkout-table">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Quantity</th>
+              <th>Price</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {cartItems.map((item) => (
+              <tr key={item.id}>
+                <td>{item.product.name}</td>
+                <td>{item.quantity}</td>
+                <td>${item.product.price.toFixed(2)}</td>
+                <td>${(item.product.price * item.quantity).toFixed(2)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       ) : (
         <p>Your cart is empty</p>
       )}
-      <h2>Total: ${total.toFixed(2)}</h2>
-      <Button onClick={() => navigate('/payment')}>Checkout</Button>
-      <Button onClick={() => navigate('/cart')}>Back to Cart</Button>
+      <div className="checkout-total">
+        <h2>Total: ${total.toFixed(2)}</h2>
+      </div>
+      <div className="checkout-actions">
+        <Button onClick={handleCheckout} className="checkout-button">Confirm Checkout</Button>
+        <Button onClick={() => navigate('/cart')} className="checkout-button">Back to Cart</Button>
+      </div>
     </div>
   );
 };
