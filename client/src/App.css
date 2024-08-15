@@ -42,7 +42,7 @@
 }
 
 .carousel {
-  max-width: 100%;
+  max-width: 800px;
   overflow: hidden;
   display: flex;
   justify-content: center;

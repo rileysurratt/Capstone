@@ -1,6 +1,6 @@
 .loginform {
     /* Overall container styling */
-    width: 100%; /* Set a fixed width for the container */
+    width: 500px; /* Set a fixed width for the container */
     margin: auto; /* Center the container horizontally */
     padding: 15px;
     border: 1px solid #ccc;
