@@ -122,10 +122,18 @@ button:focus-visible {
 }
 
 .cardGroup-container {
-
   margin-bottom: 2rem;
   margin-top: 1rem;
   padding-left: 4rem;
+}
+
+.singleProduct-container {
+  margin-bottom: 2rem;
+  margin-top: 1rem;
+  padding-left: 14rem;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
 }
 
 .search-bar {
