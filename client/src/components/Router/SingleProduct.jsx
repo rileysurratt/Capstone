@@ -2,7 +2,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Cookies from "js-cookie";
-
 import * as React from "react";
 import Card from "react-bootstrap/Card";
 import Button from "@mui/material/Button";
@@ -18,14 +17,11 @@ const SingleProduct = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [quantity, setQuantity] = useState(1);
-
   const [guestId, setGuestId] = useState(null); // State for guestId
-
   const [isAdmin, setIsAdmin] = useState(false);
   const [editProduct, setEditProduct] = useState(false);
 
-  //Retrieve the User to ensure they are an admin, this will
-  //allow ADMINS to see different things vs a guest or user.
+  // Retrieve the User to ensure they are an admin
   useEffect(() => {
     const getUserRole = async () => {
       try {
@@ -59,7 +55,7 @@ const SingleProduct = () => {
     getUserRole();
   }, []);
 
-  //Get the product
+  // Get the product
   useEffect(() => {
     const getProduct = async () => {
       try {
@@ -82,7 +78,7 @@ const SingleProduct = () => {
       }
     };
     getProduct();
-  }, []);
+  }, [id]);
 
   // Retrieve guestId cookie on component mount
   useEffect(() => {
@@ -96,35 +92,31 @@ const SingleProduct = () => {
     setEditProduct(true);
   };
 
-  // product id and quantity in the body of post request
   const addToCart = async () => {
     console.log("Add to Cart button clicked");
     try {
-      const token = localStorage.getItem("token"); // Assuming token is stored in localStorage
-      let guestId = Cookies.get("guestId"); // For guests
+      const token = localStorage.getItem("token");
+      let guestId = Cookies.get("guestId");
+
       if (!token && !guestId) {
-        // Check if the guestId cookie exists, otherwise create a new guestId
         const tempGuestId = `guest_${Date.now()}`;
         console.log("tempGeustId", tempGuestId);
 
-        // Set the guestId cookie with a max age of 7 days
         Cookies.set("guestId", tempGuestId);
-
-        // Assign the guestId to the request object
         guestId = tempGuestId;
       }
+
       const response = await fetch(
         `${import.meta.env.VITE_BACKEND_URL}/api/cart`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: token ? `Bearer ${token}` : undefined, // Include token if present
+            Authorization: token ? `Bearer ${token}` : undefined,
           },
           body: JSON.stringify({
             productId: product.id,
             quantity: parseInt(quantity),
-
             guestId: guestId,
           }),
         }
@@ -133,6 +125,7 @@ const SingleProduct = () => {
       if (!response.ok) {
         throw new Error("Failed to add to cart");
       }
+
       const result = await response.json();
       console.log("Add to cart result:", result);
       setMessage("Added to cart");
@@ -142,7 +135,6 @@ const SingleProduct = () => {
     }
   };
 
-  //Admin Patch
   const handleSave = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -178,7 +170,6 @@ const SingleProduct = () => {
     }
   };
 
-  //ADMIN DELETE
   const handleDelete = async () => {
     try {
       await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/products/${id}`, {
@@ -192,7 +183,6 @@ const SingleProduct = () => {
     }
   };
 
-  //Admin View vs Guest/User View
   return (
     <>
       <div>
@@ -228,21 +218,21 @@ const SingleProduct = () => {
                     }
                   />
                   <input
-                    className="card-details"
+                    className="card-details mb-2"
                     type="number"
                     value={quantity}
                     onChange={(e) => setQuantity(e.target.value)}
                   />
                   <Button
                     sx={{ backgroundColor: "#4d1b7b", color: "white" }}
-                    className="button-color"
+                    className="button-color mb-2"
                     onClick={handleSave}
                   >
                     Save
                   </Button>
                   <Button
                     sx={{ backgroundColor: "#4d1b7b", color: "white" }}
-                    className="button-color"
+                    className="button-color mb-2"
                     onClick={() => setEditProduct(false)}
                   >
                     Cancel
@@ -250,19 +240,21 @@ const SingleProduct = () => {
                 </>
               ) : (
                 <>
-                  <h1>{product.name}</h1>
-                  <h5>Description: {product.description}</h5>
-                  <h5>Price: {product.price}</h5>
-                  <h5>
+                  <Card.Title className="card-title">{product.name}</Card.Title>
+                  <Card.Text className="card-details">Description: {product.description}</Card.Text>
+                  <Card.Text className="card-price">Price: {product.price}</Card.Text>
+                  <Card.Text className="card-price">
                     Availability:{" "}
                     {product.quantity > 0 ? "In stock" : "Out of stock"}
-                  </h5>
-                  <h5>Quantity: {quantity}</h5>
-                  {isAdmin && (
+                  </Card.Text>
+                  <Card.Text className="card-details mb-2">Quantity: {quantity}</Card.Text>
+  
+                  {/* Admin-only buttons */}
+                  {isAdmin ? (
                     <>
                       <Button
                         sx={{ backgroundColor: "#4d1b7b", color: "white" }}
-                        className="button-color"
+                        className="button-color mb-2"
                         startIcon={<EditIcon />}
                         onClick={handleEdit}
                       >
@@ -270,25 +262,25 @@ const SingleProduct = () => {
                       </Button>
                       <Button
                         sx={{ backgroundColor: "#4d1b7b", color: "white" }}
-                        className="button-color"
+                        className="button-color mb-2"
                         startIcon={<DeleteOutlineOutlinedIcon />}
                         onClick={handleDelete}
                       >
                         Delete
                       </Button>
                     </>
-                  )}
-                  {!isAdmin && (
+                  ) : (
                     <>
                       <input
+                        className="mb-2"
                         type="number"
                         label="quantity"
                         value={quantity}
                         onChange={(e) => setQuantity(e.target.value)}
-                      ></input>
+                      />
                       <Button
                         sx={{ backgroundColor: "#4d1b7b", color: "white" }}
-                        className="button-color"
+                        className="button-color mb-2"
                         startIcon={<AddShoppingCartIcon />}
                         onClick={addToCart}
                       >
@@ -296,23 +288,24 @@ const SingleProduct = () => {
                       </Button>
                       <Button
                         sx={{ backgroundColor: "#4d1b7b", color: "white" }}
-                        className="button-color"
+                        className="button-color mb-2"
                         onClick={() => navigate("/catalog")}
                       >
                         All products
                       </Button>
                       <Button
                         sx={{ backgroundColor: "#4d1b7b", color: "white" }}
-                        className="button-color"
+                        className="button-color mb-2"
                         onClick={() => navigate("/cart")}
                       >
                         Checkout
                       </Button>
                     </>
                   )}
-                  {message && <p style={{ color: "green" }}>{message}</p>}
                 </>
               )}
+  
+              {message && <p style={{ color: "green" }}>{message}</p>}
             </Card.Body>
           </Card>
         ) : (
@@ -320,7 +313,7 @@ const SingleProduct = () => {
         )}
       </div>
     </>
-  );
+  );  
 };
 
 export default SingleProduct;

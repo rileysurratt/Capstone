@@ -137,7 +137,7 @@ const Catalog = () => {
                           <Card.Text className="card-details">
                             {product.description}
                           </Card.Text>
-                          <Card.Text className="card-details">
+                          <Card.Text className="card-price">
                             Price: {product.price}
                           </Card.Text>
                           <Card.Text className="card-details">

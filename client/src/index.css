@@ -89,11 +89,11 @@ button:focus-visible {
 }
 
 .card-container {
-  width: 400px;
-  height: 350px;
-  margin: auto;
-  border: 3px solid black;
-
+  width: 500px;
+  height: 400px;
+  border: 3px solid #363b74;
+  box-shadow: 0 0 15px 3px rgba(54, 59, 116, 0.7);
+  border-radius: 8px;
 }
 
 .card-body {
@@ -110,20 +110,25 @@ button:focus-visible {
 
 }
 
+.card-price {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+
+
+
 .card-details {
-  font-size: 0.9rem;
+  font-size: 1rem;
   margin-bottom: 0.5rem;
 }
 
-/* .button {
-  margin-top: 0.5rem;
-  font-size: 0.85rem;
-  background-color: #4d1b7b;
-} */
-
 .cardGroup-container {
+
   margin-bottom: 2rem;
   margin-top: 1rem;
+  padding-left: 4rem;
 }
 
 .search-bar {
