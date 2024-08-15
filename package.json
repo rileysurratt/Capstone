@@ -1,6 +1,6 @@
 {
   "name": "capstone-database",
-  "version": "1.0.100",
+  "version": "1.0.111",
   "description": "Database repo for capstone",
   "main": "index.js",
   "files": [
@@ -29,6 +29,7 @@
     "@prisma/client": ">=5"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@mui/material": "^5.16.0",

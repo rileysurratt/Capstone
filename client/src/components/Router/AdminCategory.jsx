@@ -125,7 +125,7 @@ const AdminCategory = () => {
       {error ? (
         <h1>{error}</h1>
       ) : category ? (
-        <Card>
+        <Card className="cardacct">
           <CardContent>
             {editCategory ? (
               <>
@@ -136,16 +136,16 @@ const AdminCategory = () => {
                     setCategory({ ...category, name: e.target.value })
                   }
                 />
-                <Button onClick={handleSave}>Save</Button>
-                <Button onClick={() => setEditCategory(false)}>Cancel</Button>
+                <Button className="admin-button" onClick={handleSave}>Save</Button>
+                <Button className="admin-button" onClick={() => setEditCategory(false)}>Cancel</Button>
               </>
             ) : (
               <>
                 <h1>{category.name}</h1>
                 {isAdmin && (
                   <>
-                    <Button onClick={handleEdit}>Edit</Button>
-                    <Button onClick={handleDelete}>Delete</Button>
+                    <Button className="admin-button" onClick={handleEdit}>Edit</Button>
+                    <Button className="admin-button" onClick={handleDelete}>Delete</Button>
                   </>
                 )}
               </>

@@ -1,0 +1,47 @@
+.footer-images{
+    display: flex;
+    /* height: 10vh; */
+    justify-content: space-evenly;
+    padding: 10px;
+    margin: auto;
+    margin-bottom: 10px;
+}
+
+.footer-buttons button {
+    background-color: #4d1b7b;
+}
+
+.footer-buttons button:hover {
+    background-color: #ef4f91;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) { /* For tablets and smaller */
+    .footer-images {
+      flex-wrap: wrap;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .footer-images img {
+      margin-bottom: 10px; /* Add space between images */
+    }
+  }
+
+  /* Make images smaller */
+.footer-images img {
+    max-width: 100px; /* Adjust this value to control the maximum width */
+    height: auto; /* Maintain aspect ratio */
+  }
+
+  .footer-image {
+    max-width: 100px;
+    height: auto;
+  }
+
+  /* Add this style for scrolling to the bottom of the footer on small screens */
+@media (max-width: 768px) {
+  .footer-images {
+    margin-bottom: 50px; /* Add a bottom margin to create space for scrolling */
+  }
+}

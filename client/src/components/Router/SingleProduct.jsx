@@ -195,7 +195,7 @@ const SingleProduct = () => {
           <h1>{error}</h1>
         ) : product ? (
           <div>
-            <Card>
+            <Card className="cardacct">
               <CardContent>
                 {editProduct ? (
                   <>
@@ -225,8 +225,8 @@ const SingleProduct = () => {
                       value={quantity}
                       onChange={(e) => setQuantity(e.target.value)}
                     />
-                    <Button onClick={handleSave}>Save</Button>
-                    <Button onClick={() => setEditProduct(false)}>
+                    <Button className="admin-button" onClick={handleSave}>Save</Button>
+                    <Button className="admin-button" onClick={() => setEditProduct(false)}>
                       Cancel
                     </Button>
                   </>

@@ -66,3 +66,25 @@
 .create-this {
     color: #4d1b7b;
 }
+
+.card-text {
+    color: #4d1b7b;
+}
+
+.cardacct {
+    background-color: #e0b9e9 !important; 
+}
+
+.admin-button{
+    background-color: #4d1b7b !important;
+    border: none !important;
+    font-family: 'Chakra Petch' !important;
+    color: white !important;
+}
+
+.admin-button:hover {
+    background-color: #ef4f91 !important;
+    border: none !important;
+    box-shadow: none !important; 
+    
+}
