@@ -23,6 +23,9 @@
     display: flex;
     width: 100%; /* Make the container take up full width */
     margin-bottom: 15px; /* Add spacing between input fields and buttons */
+    text-align: center;
+    align-items: center;
+    justify-content: center;
   }
   
   .email-password-container label {
