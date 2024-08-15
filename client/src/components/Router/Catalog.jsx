@@ -142,12 +142,14 @@ const Catalog = () => {
                             Quantity: {product.quantity}
                           </Card.Text>
                           <Button
+                            className="button-color"
                             startIcon={<InfoOutlinedIcon />}
                             onClick={() => navigate(`/products/${product.id}`)}
                           >
                             Details
                           </Button>
                           <Button
+                            className="button-color"
                             startIcon={<AddShoppingCartIcon />}
                             onClick={() => addToCart(product.id)}
                           >
