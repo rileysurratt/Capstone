@@ -10,6 +10,9 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import CheckoutForm from "./CheckoutForm";
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import EditIcon from '@mui/icons-material/Edit';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 const SingleProduct = () => {
   const [product, setProduct] = useState(null);
@@ -239,8 +242,8 @@ const SingleProduct = () => {
                     <h5>Quantity: {quantity}</h5>
                     {isAdmin && (
                       <>
-                        <Button className="admin-button" onClick={handleEdit}>Edit</Button>
-                        <Button className="admin-button" onClick={handleDelete}>Delete</Button>
+                        <Button startIcon={<EditIcon />} onClick={handleEdit}>Edit</Button>
+                        <Button startIcon={<DeleteOutlineOutlinedIcon />} onClick={handleDelete}>Delete</Button>
                       </>
                     )}
                     {!isAdmin && (
@@ -251,11 +254,11 @@ const SingleProduct = () => {
                           value={quantity}
                           onChange={(e) => setQuantity(e.target.value)}
                         ></input>
-                        <Button onClick={addToCart}>Add to cart</Button>
+                        <Button startIcon={<AddShoppingCartIcon />} onClick={addToCart}>Add to cart</Button>
                         <Button onClick={() => navigate("/catalog")}>
                           All products
                         </Button>
-                        <Button onClick={() => navigate('/payment')}>Checkout</Button>
+                        <Button onClick={() => navigate('/checkout')}>Checkout</Button>
                       </>
                     )}
                     {message && <p style={{ color: "green" }}>{message}</p>}

@@ -48,13 +48,14 @@ button {
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 499;
-  font-family: inherit;
-  background-color: #1a1a1a;
+  font-family: 'Chakra Petch' ;
+  background-color: #4d1b7b;
   cursor: pointer;
   transition: border-color 0.25s;
 }
 button:hover {
   border-color: #646cff;
+  background-color: #ef4f91;
 }
 button:focus,
 button:focus-visible {

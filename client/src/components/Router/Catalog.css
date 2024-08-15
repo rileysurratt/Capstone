@@ -1,0 +1,45 @@
+/* Add padding between each category */
+.category-section {
+    padding-bottom: 2rem;
+    /* Adjust padding as needed */
+    margin-bottom: 2rem;
+    /* Additional margin for spacing */
+    border-bottom: 1px solid #ddd;
+    /* Optional: Add a separator between categories */
+}
+
+.card-container {
+    width: 18rem;
+    height: 22rem;
+    margin: auto;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-title {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.card-script {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.card-price {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.button {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+}
+
+.cardGroup-container {
+    margin-bottom: 2rem;
+}
