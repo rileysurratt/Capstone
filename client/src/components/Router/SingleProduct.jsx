@@ -194,24 +194,6 @@ const SingleProduct = () => {
           <div>
             <Card className="cardacct">
               <CardContent>
-                {/* <h1>{product.name}</h1>
-                <h5>Description: {product.description}</h5>
-                <h5>Price: {product.price}</h5>
-                <h5>
-                  Availibility:{" "}
-                  {product.quantity > 0 ? "In stock" : "Out of stock"}
-                </h5>
-                <input
-                  type="number"
-                  label="quantity"
-                  value={quantity}
-                  onChange={(e) => setQuantity(e.target.value)}
-                ></input>
-                <button onClick={addToCart}>Add to cart</button>
-                <button onClick={() => navigate("/catalog")}>
-                  All products
-                </button>
-                {message && <p style={{ color: "green" }}>{message}</p>} */}
                 {editProduct ? (
                   <>
                     <input
@@ -240,8 +222,8 @@ const SingleProduct = () => {
                       value={quantity}
                       onChange={(e) => setQuantity(e.target.value)}
                     />
-                    <Button onClick={handleSave}>Save</Button>
-                    <Button onClick={() => setEditProduct(false)}>
+                    <Button className="admin-button" onClick={handleSave}>Save</Button>
+                    <Button className="admin-button" onClick={() => setEditProduct(false)}>
                       Cancel
                     </Button>
                   </>
@@ -257,8 +239,8 @@ const SingleProduct = () => {
                     <h5>Quantity: {quantity}</h5>
                     {isAdmin && (
                       <>
-                        <Button onClick={handleEdit}>Edit</Button>
-                        <Button onClick={handleDelete}>Delete</Button>
+                        <Button className="admin-button" onClick={handleEdit}>Edit</Button>
+                        <Button className="admin-button" onClick={handleDelete}>Delete</Button>
                       </>
                     )}
                     {!isAdmin && (
