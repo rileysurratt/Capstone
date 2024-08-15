@@ -131,7 +131,7 @@ const AdminUser = () => {
           <h1>{error}</h1>
         ) : user ? (
           <div>
-            <Card>
+            <Card className="cardacct">
               <CardContent>
                 {editUser ? (
                   <>
@@ -167,8 +167,8 @@ const AdminUser = () => {
                         <option value="USER">USER</option>
                       </select>
                     )}
-                    <Button onClick={handleSave}>Save</Button>
-                    <Button onClick={() => setEditUser(false)}>Cancel</Button>
+                    <Button className="admin-button" onClick={handleSave}>Save</Button>
+                    <Button className="admin-button" onClick={() => setEditUser(false)}>Cancel</Button>
                   </>
                 ) : (
                   <>
@@ -178,8 +178,8 @@ const AdminUser = () => {
                     <h5>Role: {user.role}</h5>
                     {isAdmin && (
                       <>
-                        <Button onClick={handleEdit}>Edit</Button>
-                        <Button onClick={handleDelete}>Delete</Button>
+                        <Button className="admin-button" onClick={handleEdit}>Edit</Button>
+                        <Button className="admin-button" onClick={handleDelete}>Delete</Button>
                       </>
                     )}
                   </>

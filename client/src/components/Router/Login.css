@@ -1,0 +1,90 @@
+.loginform {
+    /* Overall container styling */
+    width: 500px; /* Set a fixed width for the container */
+    margin: auto; /* Center the container horizontally */
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .form-group {
+    /* Form styling */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+  } 
+  
+  .email-password-container {
+    /* Input field container styling */
+    display: flex;
+    width: 100%; /* Make the container take up full width */
+    margin-bottom: 15px; /* Add spacing between input fields and buttons */
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .email-password-container label {
+    /* Label styling */
+    margin-bottom: 5px;
+  }
+  
+  .email-password-container input {
+    /* Input field styling */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    width: 100%; /* Make input fields take up full width */
+  }
+  
+  .loginform button {
+    /* Button styling */
+    padding: 10px 20px;
+    background-color: #4d1b7b;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-bottom: 10px; /* Add spacing between buttons */
+  }
+
+  .loginform button:hover {
+    /* Button styling */
+    background-color: #ef4f91;
+  }
+
+  .logged-in-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .logged-in-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .login-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* height: 50px;
+    width: 100px; */
+  }
+
+  .text-label {
+    margin: auto;
+    padding: 3px;
+  }
+
+  .text-input {
+    height: 30px;
+    margin-right: 5px;
+    margin-left: 5px;
+  }

@@ -49,10 +49,8 @@ const Account = () => {
         );
         const data = await response.json();
         setUsers(data);
-        // console.log(data);
         setLoading(false);
       } catch (error) {
-        // console.log(error);
         setLoading(false);
       }
     }
@@ -68,10 +66,8 @@ const Account = () => {
         );
         const data = await response.json();
         setProducts(data);
-        // console.log(data);
         setLoading(false);
       } catch (error) {
-        // console.log(error);
         setLoading(false);
       }
     }
@@ -87,10 +83,8 @@ const Account = () => {
         );
         const data = await response.json();
         setCategories(data);
-        // console.log(data);
         setLoading(false);
       } catch (error) {
-        // console.log(error);
         setLoading(false);
       }
     }

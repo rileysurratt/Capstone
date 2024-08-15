@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import './OrderHistory.css'; // Import your CSS file
 
 const OrderHistory = () => {
   const [orders, setOrders] = useState([]);
@@ -29,24 +30,35 @@ const OrderHistory = () => {
   if (error) return <div>Error loading orders: {error.message}</div>;
 
   return (
-    <div>
+    <div className="order-history-container">
       <h1>Order History</h1>
       {orders.length > 0 ? (
-        <ul>
-          {orders.map((order) => (
-            <li key={order.id}>
-              <h2>Order #{order.id}</h2>
-              <p>Total Price: ${order.totalPrice.toFixed(2)}</p>
-              <ul>
-                {order.orderItems.map((item) => (
-                  <li key={item.id}>
-                    {item.product.name} - {item.quantity} x ${item.product.price.toFixed(2)}
-                  </li>
-                ))}
-              </ul>
-            </li>
-          ))}
-        </ul>
+        <table className="order-history-table">
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Total Price</th>
+              <th>Items</th>
+            </tr>
+          </thead>
+          <tbody>
+            {orders.map((order) => (
+              <tr key={order.id}>
+                <td>{order.id}</td>
+                <td>${order.totalPrice.toFixed(2)}</td>
+                <td>
+                  <ul>
+                    {order.orderItems.map((item) => (
+                      <li key={item.id}>
+                        {item.product.name} - {item.quantity} x ${item.product.price.toFixed(2)}
+                      </li>
+                    ))}
+                  </ul>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       ) : (
         <p>You have no orders.</p>
       )}

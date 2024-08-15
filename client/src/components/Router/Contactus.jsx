@@ -58,10 +58,10 @@ const Contactus = () => {
   
     try {
       const templateParams = {
-        from_name: user.email,
-        to_name: import.meta.env.ADMIN_EMAIL,  
-        subject: `Contact Us - ${selectedTopic}`,
-        message: `Message from ${user.email}: ${message}`,
+        from_name: user.user.email,
+        to_name: 'Admin',
+        subject: `${selectedTopic}`,
+        message: `Message from ${user.user.name}: ${message}`,
       };
   
       const response = await emailjs.send(

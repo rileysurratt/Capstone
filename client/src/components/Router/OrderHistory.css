@@ -1,0 +1,25 @@
+.order-history-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    margin-bottom: 150px;
+  }
+  
+  .order-history-table {
+    width: 80%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .order-history-table th,
+  .order-history-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .order-history-table th {
+    background-color: #f2f2f2;
+  }
+  

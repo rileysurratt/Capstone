@@ -41,8 +41,54 @@
   color: #888;
 }
 
+.carousel {
+  max-width: 800px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+  height: 600px;
+}
+
 .carousel-image {
   width: 100%; /* Ensures the image takes up the full width of the carousel item */
-  height: 400px; /* Set a fixed height */
+  max-width: 512px;
+  margin: auto;
+  height: 100%; /* Ensures the image takes up the full height of the carousel item */
+  max-height: 512px;
   object-fit: cover; /* Ensures the image covers the area while maintaining aspect ratio */
+  background-color: transparent;
+}
+
+/* Add smooth transition to carousel items */
+.carousel-item {
+  transition: transform 1.5s ease-in-out !important;
+  /* background-color: transparent; 
+  display: flex;
+  justify-content: center;
+  align-items: center;; */
+  text-align: center;
+  margin: auto;
+}
+
+.full-page {
+  /* position: fixed; */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 0;
+  /* background: #fff; Optional: set a background color if needed */
+}
+
+/* Style for the carousel container to prevent resizing */
+.carousel {
+  height: 600px; /* Set a fixed height for the carousel */
+}
+
+/* Style for the carousel images to maintain aspect ratio */
+.carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }

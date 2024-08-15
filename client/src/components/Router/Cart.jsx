@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import './Cart.css'
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -104,38 +105,55 @@ const Cart = () => {
   }, []);
 
   return (
-    <div>
+    <div className="cart-container">
       <h1>Shopping Cart</h1>
       {cartItems.length > 0 ? (
-        <ul>
-          {cartItems.map((item) => (
-            <li key={item.id}>
-              {item.product.name} - 
-              <input
-                type="number"
-                value={item.quantity}
-                onChange={(e) => updateCartItemQuantity(item.product.id, parseInt(e.target.value))}
-                min="1"
-              />
-              x ${item.product.price.toFixed(2)}
-              <button onClick={() => removeCartItem(item.product.id)}>Remove</button>
-            </li>
-          ))}
-        </ul>
+        <table className="cart-table">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Quantity</th>
+              <th>Price</th>
+              <th>Total</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {cartItems.map((item) => (
+              <tr key={item.id}>
+                <td>{item.product.name}</td>
+                <td>
+                  <input
+                    className='cart-quantity-input'
+                    type="number"
+                    value={item.quantity}
+                    onChange={(e) => updateCartItemQuantity(item.product.id, parseInt(e.target.value))}
+                    min="1"
+                  />
+                </td>
+                <td>${item.product.price.toFixed(2)}</td>
+                <td>${(item.product.price * item.quantity).toFixed(2)}</td>
+                <td>
+                  <button className='cart-button' onClick={() => removeCartItem(item.product.id)}>Remove</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       ) : (
         <p>Your cart is empty</p>
       )}
-      <h2>Total: ${total.toFixed(2)}</h2>
+      <div className="cart-total">
+        <h2>Total: ${total.toFixed(2)}</h2>
+      </div>
       {cartItems.length > 0 && (
-        <div>
-        <button onClick={clearCart}>Clear Cart</button>
-        <button onClick={() => navigate('/checkout', { state: { cartItems, total } })}>Checkout</button>
+        <div className="cart-actions">
+          <button onClick={clearCart} className="cart-button">Clear Cart</button>
+          <button onClick={() => navigate('/checkout', { state: { cartItems, total } })} className="cart-button">Checkout</button>
         </div>
       )}
-
     </div>
   );
 };
-
 
 export default Cart;
