@@ -122,20 +122,24 @@ const Catalog = () => {
                 {filteredProducts
                   .filter((product) => product.categoryId === category.id)
                   .map((product) => (
-                    <Card
-                      key={product.id}
-                      sx={{ maxWidth: 350, maxHeight: 200 }}
-                    >
-                      <Card.Img variant="top" />
-                      <Card.Body>
-                        <Card.Title>{product.name}</Card.Title>
-                        <Card.Text>{product.description}</Card.Text>
-                        <Card.Text>Price: {product.price}</Card.Text>
-                        <Card.Text>Quantity: {product.quantity}</Card.Text>
-                        <Button onClick={() => navigate(`/products/${product.id}`)}>Details</Button>
-                        <Button onClick={() => addToCart(product.id)}>Add to cart</Button>
-                      </Card.Body>
-                    </Card>
+                    <Col key={product.id}>
+                      <Card className="card-container">
+                        <Card.Body className="card-body">
+                          <Card.Title className="card-title">{product.name}</Card.Title>
+                          <Card.Text className="card-script">{product.description}</Card.Text>
+                          <Card.Text className="card-price">Price: {product.price}</Card.Text>
+                          <Card.Text className="card-title">Quantity: {product.quantity}</Card.Text>
+                          <Button
+                            onClick={() => navigate(`/products/${product.id}`)}
+                          >
+                            Details
+                          </Button>
+                          <Button onClick={() => addToCart(product.id)}>
+                            Add to cart
+                          </Button>
+                        </Card.Body>
+                      </Card>
+                    </Col>
                   ))}
               </Row>
             </div>
