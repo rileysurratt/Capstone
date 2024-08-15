@@ -48,6 +48,7 @@
   justify-content: center;
   align-items: center;
   padding: 3rem;
+  height: 600px;
 }
 
 .carousel-image {
@@ -72,10 +73,22 @@
 }
 
 .full-page {
-  position: fixed;
+  /* position: fixed; */
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 1000;
+  z-index: 0;
   /* background: #fff; Optional: set a background color if needed */
+}
+
+/* Style for the carousel container to prevent resizing */
+.carousel {
+  height: 600px; /* Set a fixed height for the carousel */
+}
+
+/* Style for the carousel images to maintain aspect ratio */
+.carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
