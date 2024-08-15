@@ -131,7 +131,7 @@ const AdminUser = () => {
           <h1>{error}</h1>
         ) : user ? (
           <div>
-            <Card>
+            <Card className="cardacct">
               <CardContent>
                 {editUser ? (
                   <>

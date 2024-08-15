@@ -125,7 +125,7 @@ const AdminCategory = () => {
       {error ? (
         <h1>{error}</h1>
       ) : category ? (
-        <Card>
+        <Card className="cardacct">
           <CardContent>
             {editCategory ? (
               <>
