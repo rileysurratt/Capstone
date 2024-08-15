@@ -88,3 +88,9 @@
     box-shadow: none !important; 
     
 }
+
+.phimg {
+    width: 100px;
+    display: block;
+    margin: 0 auto;
+}

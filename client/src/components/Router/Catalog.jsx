@@ -116,7 +116,7 @@ const Catalog = () => {
       ) : (
         <div>
           {categories.map((category) => (
-            <div key={category.id}>
+            <div key={category.id} className="category-container">
               <h1>{category.name}</h1>
               <Row xs={1} md={2} className="g-4 cardGroup-container">
                 {filteredProducts
@@ -137,7 +137,7 @@ const Catalog = () => {
                           <Button onClick={() => addToCart(product.id)}>
                             Add to cart
                           </Button>
-                        </Card.Body>
+                          <Card.Img variant="top" src="./headphone.png" className="phimg" />                        </Card.Body>
                       </Card>
                     </Col>
                   ))}
