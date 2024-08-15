@@ -10,6 +10,9 @@ import Button from "@mui/material/Button";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+
 
 const Catalog = () => {
   const [products, setProducts] = useState([]);
@@ -125,16 +128,25 @@ const Catalog = () => {
                     <Col key={product.id}>
                       <Card className="card-container">
                         <Card.Body className="card-body">
-                          <Card.Title className="card-title">{product.name}</Card.Title>
-                          <Card.Text className="card-script">{product.description}</Card.Text>
-                          <Card.Text className="card-price">Price: {product.price}</Card.Text>
-                          <Card.Text className="card-title">Quantity: {product.quantity}</Card.Text>
+                          <Card.Title className="card-title">
+                            {product.name}
+                          </Card.Title>
+                          <Card.Text className="card-script">
+                            {product.description}
+                          </Card.Text>
+                          <Card.Text className="card-price">
+                            Price: {product.price}
+                          </Card.Text>
+                          <Card.Text className="card-title">
+                            Quantity: {product.quantity}
+                          </Card.Text>
                           <Button
+                            startIcon={<InfoOutlinedIcon />}
                             onClick={() => navigate(`/products/${product.id}`)}
                           >
                             Details
                           </Button>
-                          <Button onClick={() => addToCart(product.id)}>
+                          <Button startIcon={<AddShoppingCartIcon />} onClick={() => addToCart(product.id)}>
                             Add to cart
                           </Button>
                         </Card.Body>

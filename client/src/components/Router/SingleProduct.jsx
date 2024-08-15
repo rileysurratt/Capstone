@@ -10,6 +10,9 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import CheckoutForm from "./CheckoutForm";
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import EditIcon from '@mui/icons-material/Edit';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 const SingleProduct = () => {
   const [product, setProduct] = useState(null);
@@ -194,24 +197,6 @@ const SingleProduct = () => {
           <div>
             <Card>
               <CardContent>
-                {/* <h1>{product.name}</h1>
-                <h5>Description: {product.description}</h5>
-                <h5>Price: {product.price}</h5>
-                <h5>
-                  Availibility:{" "}
-                  {product.quantity > 0 ? "In stock" : "Out of stock"}
-                </h5>
-                <input
-                  type="number"
-                  label="quantity"
-                  value={quantity}
-                  onChange={(e) => setQuantity(e.target.value)}
-                ></input>
-                <button onClick={addToCart}>Add to cart</button>
-                <button onClick={() => navigate("/catalog")}>
-                  All products
-                </button>
-                {message && <p style={{ color: "green" }}>{message}</p>} */}
                 {editProduct ? (
                   <>
                     <input
@@ -257,8 +242,8 @@ const SingleProduct = () => {
                     <h5>Quantity: {quantity}</h5>
                     {isAdmin && (
                       <>
-                        <Button onClick={handleEdit}>Edit</Button>
-                        <Button onClick={handleDelete}>Delete</Button>
+                        <Button startIcon={<EditIcon />} onClick={handleEdit}>Edit</Button>
+                        <Button startIcon={<DeleteOutlineOutlinedIcon />} onClick={handleDelete}>Delete</Button>
                       </>
                     )}
                     {!isAdmin && (
@@ -269,11 +254,11 @@ const SingleProduct = () => {
                           value={quantity}
                           onChange={(e) => setQuantity(e.target.value)}
                         ></input>
-                        <Button onClick={addToCart}>Add to cart</Button>
+                        <Button startIcon={<AddShoppingCartIcon />} onClick={addToCart}>Add to cart</Button>
                         <Button onClick={() => navigate("/catalog")}>
                           All products
                         </Button>
-                        <Button onClick={() => navigate('/payment')}>Checkout</Button>
+                        <Button onClick={() => navigate('/checkout')}>Checkout</Button>
                       </>
                     )}
                     {message && <p style={{ color: "green" }}>{message}</p>}
