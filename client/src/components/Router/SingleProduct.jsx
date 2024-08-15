@@ -192,7 +192,7 @@ const SingleProduct = () => {
           <h1>{error}</h1>
         ) : product ? (
           <div>
-            <Card>
+            <Card className="cardacct">
               <CardContent>
                 {/* <h1>{product.name}</h1>
                 <h5>Description: {product.description}</h5>
