@@ -8,7 +8,6 @@ const { authenticateAndAuthorize } = require("../../middleware/authMiddleware");
 
 // GET /api/users/me (Get current user's info)
 router.get('/users/me', authenticateAndAuthorize("ADMIN", "USER"), async (req, res) => {
-    // console.log('req.user:', req.user);
     try {
         const userId = req.user.id; // Assuming authentication middleware sets req.user
 
@@ -29,7 +28,8 @@ router.get('/users/me', authenticateAndAuthorize("ADMIN", "USER"), async (req, r
 
 // PATCH /api/users/me (Update current user's info)
 router.patch('/users/me', authenticateAndAuthorize("USER", "ADMIN"), async (req, res) => {
-    const userId = req.user.id; // Get the user ID from the authenticated user
+    // Get the user ID from the authenticated user
+    const userId = req.user.id;
     const { email, name, address, password } = req.body;
 
     try {
