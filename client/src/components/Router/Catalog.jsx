@@ -159,7 +159,7 @@ const Catalog = () => {
                           >
                             Add to cart
                           </Button>
-                        </Card.Body>
+                          <Card.Img variant="top" src="./headphone.png" className="phimg" />                        </Card.Body>
                       </Card>
                     </Col>
                   ))}
