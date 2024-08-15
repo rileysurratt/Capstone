@@ -11,12 +11,17 @@ const SearchAndFilterBar = ({ categories, products, onFilter }) => {
 
   useEffect(() => {
     const filtered = products.filter((product) => {
-      const matchesCategory = !selectedCategory || product.categoryId === selectedCategory;
-      const matchesPrice = 
-        priceFilter === 'low' ? product.price < 200 :
-        priceFilter === 'high' ? product.price >= 200 :
-        true;
-      const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesCategory =
+        !selectedCategory || product.categoryId === selectedCategory;
+      const matchesPrice =
+        priceFilter === "low"
+          ? product.price < 200
+          : priceFilter === "high"
+          ? product.price >= 200
+          : true;
+      const matchesSearch = product.name
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase());
 
       return matchesCategory && matchesPrice && matchesSearch;
     });
@@ -27,12 +32,14 @@ const SearchAndFilterBar = ({ categories, products, onFilter }) => {
   return (
     <Box>
       <TextField
+        className="form-color"
         type="text"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
         placeholder="Search products..."
       />
       <Select
+        className="form-color"
         value={selectedCategory}
         onChange={(e) => setSelectedCategory(e.target.value)}
         displayEmpty
@@ -45,6 +52,7 @@ const SearchAndFilterBar = ({ categories, products, onFilter }) => {
         ))}
       </Select>
       <Select
+        className="form-color"
         value={priceFilter}
         onChange={(e) => setPriceFilter(e.target.value)}
         displayEmpty

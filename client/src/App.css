@@ -33,13 +33,9 @@
   }
 }
 
-.card {
-  padding: 2em;
-}
 
-.read-the-docs {
-  color: #888;
-}
+
+
 
 .carousel {
   max-width: 800px;
@@ -92,3 +88,4 @@
   height: 100%;
   object-fit: cover;
 }
+
