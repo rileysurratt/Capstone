@@ -11,8 +11,7 @@ import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
 const Catalog = () => {
   const [products, setProducts] = useState([]);
@@ -63,6 +62,7 @@ const Catalog = () => {
       const result = await response.json();
       console.log("Add to cart result:", result);
       setMessage("Added to cart");
+      alert("Added to cart");
     } catch (error) {
       console.log(error);
       setMessage("Error adding to cart");
@@ -121,6 +121,7 @@ const Catalog = () => {
           {categories.map((category) => (
             <div key={category.id}>
               <h1>{category.name}</h1>
+
               <Row xs={1} md={2} className="g-4 cardGroup-container">
                 {filteredProducts
                   .filter((product) => product.categoryId === category.id)
@@ -146,7 +147,10 @@ const Catalog = () => {
                           >
                             Details
                           </Button>
-                          <Button startIcon={<AddShoppingCartIcon />} onClick={() => addToCart(product.id)}>
+                          <Button
+                            startIcon={<AddShoppingCartIcon />}
+                            onClick={() => addToCart(product.id)}
+                          >
                             Add to cart
                           </Button>
                         </Card.Body>
