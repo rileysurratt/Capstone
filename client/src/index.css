@@ -90,7 +90,7 @@ button:focus-visible {
 
 .card-container {
   width: 500px;
-  height: 400px;
+  height: 500px;
   border: 3px solid #363b74;
   box-shadow: 0 0 15px 3px rgba(54, 59, 116, 0.7);
   border-radius: 8px;
@@ -116,19 +116,24 @@ button:focus-visible {
   font-weight: 500;
 }
 
-
-
-
 .card-details {
   font-size: 1rem;
   margin-bottom: 0.5rem;
 }
 
 .cardGroup-container {
-
   margin-bottom: 2rem;
   margin-top: 1rem;
   padding-left: 4rem;
+}
+
+.singleProduct-container {
+  margin-bottom: 2rem;
+  margin-top: 1rem;
+  padding-left: 14rem;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
 }
 
 .search-bar {

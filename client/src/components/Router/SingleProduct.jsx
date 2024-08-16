@@ -185,7 +185,7 @@ const SingleProduct = () => {
 
   return (
     <>
-      <div>
+      <div className="singleProduct-container">
         {error ? (
           <h1>{error}</h1>
         ) : product ? (
