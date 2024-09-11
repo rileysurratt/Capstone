@@ -66,7 +66,7 @@ const CheckoutConfirmation = () => {
         <h2>Total: ${total.toFixed(2)}</h2>
       </div>
       <div className="checkout-actions">
-        <Button onClick={handleCheckout} className="checkout-button">Confirm Checkout</Button>
+        <Button onClick={() => navigate('/payment')} className="checkout-button">Confirm Checkout</Button>
         <Button onClick={() => navigate('/cart')} className="checkout-button">Back to Cart</Button>
       </div>
     </div>
