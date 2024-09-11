@@ -5,7 +5,7 @@ const router = express.Router();
 const app = express();
 app.use(express.static('public'));
 
-const YOUR_DOMAIN = 'http://localhost:5173';
+const YOUR_DOMAIN = 'https://leafy-kitsune-f946dd.netlify.app';
 
 router.post('/create-checkout-session', async (req, res) => {
     console.log("post")
