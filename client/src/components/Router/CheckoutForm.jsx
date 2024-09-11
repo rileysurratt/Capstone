@@ -19,7 +19,7 @@ const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 const CheckoutForm = () => {
   const fetchClientSecret = useCallback(() => {
     // Create a Checkout Session
-    return fetch("http://localhost:3000/api/create-checkout-session", {
+    return fetch( `${import.meta.env.VITE_BACKEND_URL}/api/create-checkout-session`, {
       method: "POST",
     })
       .then((res) => res.json())
