@@ -19,7 +19,7 @@ router.post('/create-checkout-session', async (req, res) => {
       },
     ],
     mode: 'payment',
-    success_url: `${YOUR_DOMAIN}/order-success`,
+    return_url: `https://leafy-kitsune-f946dd.netlify.app/order-success`,
   });
 
   res.send({clientSecret: session.client_secret});
