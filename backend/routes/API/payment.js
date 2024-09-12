@@ -5,7 +5,7 @@ const router = express.Router();
 const app = express();
 app.use(express.static('public'));
 
-const YOUR_DOMAIN = 'https://66e2332240efa0ab273a4965--leafy-kitsune-f946dd.netlify.app';
+const YOUR_DOMAIN = 'https://leafy-kitsune-f946dd.netlify.app';
 
 router.post('/create-checkout-session', async (req, res) => {
     console.log("post")
@@ -19,7 +19,7 @@ router.post('/create-checkout-session', async (req, res) => {
       },
     ],
     mode: 'payment',
-    return_url: `${YOUR_DOMAIN}/order-success`,
+    success_url: `${YOUR_DOMAIN}/order-success`,
   });
 
   res.send({clientSecret: session.client_secret});
