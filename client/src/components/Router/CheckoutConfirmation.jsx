@@ -34,6 +34,7 @@ const CheckoutConfirmation = () => {
     }
   };
 
+  console.log('checkout confirmed')
 
   return (
     <div className="checkout-container">
